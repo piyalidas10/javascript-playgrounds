@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Closure Example 4</h2>
+<button onclick="document.getElementById('result').innerHTML = sum(1)">sum(1)</button>
+<button onclick="document.getElementById('result').innerHTML = sum(1)(2)">sum(1)(2)</button>
+<button onclick="document.getElementById('result').innerHTML = sum(1)(2)(3)">sum(1)(2)(3)</button>
+<button onclick="document.getElementById('result').innerHTML = sum(1)(2)(3)(4)">sum(1)(2)(3)(4)</button>
+<h3 id="result"></h3>
+<script>
+    function sum(a) {
+        return function(b) {
+            return function(c) {
+                return function(d) {
+                    return a+b+c+d;
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html> 

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Trotlling using windows resize</h2>
+<script>
+const trotlle = (myfunc, delay) => {
+    console.log(delay);
+    let flag = true;
+    return function() {    
+        if (flag) {
+            myfunc();
+            flag = false;
+            setTimeout(() =>{
+                flag = true;
+                console.log(flag);
+            }, delay);
+        }
+    }
+};
+
+function betterExperienceFunc() {
+    alert('Funtion is triggered');
+}
+
+window.addEventListener("resize", trotlle(betterExperienceFunc, 1000));
+</script>
+</body>
+</html> 

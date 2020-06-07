@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Throttling using button click</h2>
+<p>Open console to check</p>
+<button id="btn">Click on Button</button>
+<script>
+function trotlle(myfunc, delay) {
+    let flag = true;
+    return function () {   
+        if (flag) {
+            myfunc.call(this);
+            flag = false;
+            setTimeout(() =>{
+                flag = true;
+            }, delay);
+        }
+    }
+};
+
+function betterExperienceFunc() {
+    console.log('doSomething');
+}
+let btnid = document.getElementById('btn');
+btnid.addEventListener('click', trotlle(betterExperienceFunc, 3000));
+</script>
+</body>
+</html> 

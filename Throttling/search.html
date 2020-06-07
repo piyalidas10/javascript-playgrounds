@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Throttling example using search box</h2>
+<input id="input" type="text" style="width: 200px; padding: 5px 10px;">
+<p id="show"></p>
+<script>
+    function trotlling(myfunc, delay) {
+        let flag = true;
+        return function () {
+            if (flag) {
+                myfunc();
+                flag = false;
+                setTimeout(() =>{
+                    flag = true;
+                }, delay);
+            }
+        }
+    };
+    
+    function betterExperienceFunc() {
+        let inputTxt = document.getElementById('input').value;
+        console.log(inputTxt);
+        document.getElementById('show').innerText = inputTxt;
+    }
+    document.getElementById('input').addEventListener('keydown', trotlling(betterExperienceFunc, 1000));
+    </script>
+</body>
+</html> 

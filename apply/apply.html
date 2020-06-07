@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Call</h2>
+<p>Open console to check</p>
+<script>
+    let person1 = {
+        firstname: 'Piyali',
+        lastname: 'das'
+    }
+
+    let display = function(hometown) {
+        console.log(this.firstname + ' ' + this.lastname + ' from ' + hometown);
+    }
+
+    display.apply(person1, ['kolkata']); // call (pointing object, parameter)
+
+    let person2 = {
+        firstname: 'John',
+        lastname: 'Dawson'
+    };
+    display.apply(person2, ['california']);
+</script>
+</body>
+</html> 

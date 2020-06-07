@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Closure Example 2</h2>
+<button onclick="alert(add(1)(2))">Click On Button</button>
+<script>
+    function add(a) {
+        return function(b) {
+            return a+b;
+        }
+    }
+</script>
+</body>
+</html> 

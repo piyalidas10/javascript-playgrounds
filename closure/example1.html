@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Closure Example 1</h2>
+<script>
+    function init() {
+        var name = 'Piyali'; // name is a local variable created by init
+        function displayName() { // displayName() is the inner function, a closure
+            alert(name); // use variable declared in the parent function
+        }
+        displayName();
+    }
+    init();
+
+</script>
+</body>
+</html> 

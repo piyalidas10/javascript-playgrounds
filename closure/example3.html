@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Closure Example 3</h2>
+<p>Piyali Das</p>
+<button onclick="makeSizer(50)()">Click On Button</button>
+<script>
+    function makeSizer(size) {
+        return function() {
+            document.body.style.fontSize = size + 'px';
+        };
+    }
+    console.log(makeSizer(50));
+</script>
+</body>
+</html> 

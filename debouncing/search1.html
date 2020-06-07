@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Debouncing example using search box</h2>
+<input  id="input" type="text" style="width: 200px; padding: 5px 10px;" onkeyup="mainunc()">
+<p id="target"></p>
+<script>
+    const betterExperienceFunc = () => {
+        document.getElementById('target').textContent = input.value;
+        console.log('Function is fired');
+    };
+    const debouncing = (delay) => {
+        let timeout;
+        return function() {
+            let contest = this, args = arguments; // contest is this
+            console.log(contest, args);
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                betterExperienceFunc.apply(contest, args);
+            }, delay);
+        }
+    };
+    const mainunc = debouncing(1000);
+</script>
+</body>
+</html>

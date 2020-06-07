@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Context</h2>
+<p>Open console to check</p>
+<script>
+console.log(this); // print window object
+
+var a = 1;
+console.log(this.a); // print value 1
+console.log(a); // print value 1
+
+function foo() {
+    console.log(this);
+}
+foo(); // print window object becuase by deault it will take window.foo()
+
+var obj = {
+    foo: function(){
+        console.log(this); // print object foo: ƒ ()
+    }
+}
+obj.foo();
+obj.foo.apply();
+obj.foo.call();
+var mybound = obj.foo.bind(window);
+mybound();
+
+</script>
+</body>
+</html> 

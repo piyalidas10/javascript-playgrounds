@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Call</h2>
+<p>Open console to check</p>
+<script>
+    let person1 = {
+        firstname: 'Piyali',
+        lastname: 'das'
+    }
+
+    let display = function(hometown) {
+        console.log(this.firstname + ' ' + this.lastname + ' from ' + hometown);
+    }
+
+    let one = display.bind(person1, 'kolkata');
+    one();
+
+    let person2 = {
+        firstname: 'John',
+        lastname: 'Dawson'
+    };
+    let two = display.bind(person2, 'california');
+    two();
+</script>
+</body>
+</html> 

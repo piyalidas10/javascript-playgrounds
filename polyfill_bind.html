@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Call</h2>
+<p>Open console to check</p>
+<script>
+    let person = {
+        firstname: 'Piyali',
+        lastname: 'das'
+    }
+
+    let display = function() {
+        console.log(this.firstname + ' ' + this.lastname);
+    }
+
+    Function.prototype.mybind = function(...arg) {
+        let obj = this; // this refers to person object
+        return function() {
+            obj.call(arg[0]);
+        }
+    };
+
+    let print = display.mybind(person);
+    print();
+
+</script>
+</body>
+</html> 

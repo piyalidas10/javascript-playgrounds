@@ -1,0 +1,20 @@
+nav {
+    background: #000000;
+    margin-bottom: 20px;
+}
+nav a{
+    display: inline-block;
+    margin-right: 10px;
+    padding: 10px;
+    color: #ffffff;
+    font-size: 14px;
+    text-transform: capitalize;
+}
+nav a:hover {
+    color: #FFFF00;
+}
+section {
+    border: #aaaaaa 1px solid;
+    min-height: 300px;
+    padding: 20px;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Debouncing example using search box</h2>
+<input  id="input" type="text" style="width: 200px; padding: 5px 10px;">
+<p id="target"></p>
+<script>
+    let timeout = null;
+    
+    function betterExperienceFunc() {
+        document.getElementById('target').textContent = input.value;
+        console.log('Function is fired');
+    }
+
+    function debouncing(delay) {
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+            betterExperienceFunc();
+        }, delay);
+    }
+
+    let input = document.getElementById('input');
+    // Listen for keystroke events
+    input.addEventListener('keyup', () => {
+        debouncing(1000);
+    });
+
+    </script>
+</body>
+</html> 
