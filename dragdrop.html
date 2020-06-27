@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Drag and Drop Elements with Vanilla JavaScript and HTML</title>
+        <style>
+            .parent{
+                display: flex;
+            }
+            .left,.right {
+                width: 200px;
+                padding: 20px;
+                border: black 2px solid;
+            }
+            .left span{
+                background-color: blueviolet;
+                padding: 10px 25px;
+                display: block;
+                color: blanchedalmond;
+            }
+            .right p {
+                margin-top: 0;
+            }
+            .right span {
+                display: block;
+                padding: 10px 25px;
+                background-color: blueviolet;
+                color: blanchedalmond;
+            }
+        </style>
+        <script>
+            function onDragStart(event) {
+              event.dataTransfer.setData('text/plain', event.target.id);
+              // event.currentTarget.style.backgroundColor = 'yellow';
+            }
+            function onDragOver(event) {
+              event.preventDefault();
+            }
+            function onDrop(event) {
+              const id = event.dataTransfer.getData('text');
+              console.log(id);
+              const draggableElement = document.getElementById(id);
+              console.log(draggableElement);
+              const dropzone = event.target;
+              dropzone.appendChild(draggableElement);
+              console.log(dropzone);
+              event.dataTransfer.clearData();
+          }
+        </script>
+    </head>
+<body>
+<h2>Drag and Drop Elements with Vanilla JavaScript and HTML</h2>
+
+<div class="parent">
+    <div class="left">
+        <span id="draggableSpan" draggable="true" ondragstart="onDragStart(event)">
+        draggable
+        </span>
+    </div>
+    <div class="right" ondragover="onDragOver(event)" ondrop="onDrop(event)">
+        <p> dropzone </p>
+    </div>
+  </div>
+</body>
+</html>

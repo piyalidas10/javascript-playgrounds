@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Compare keys value of an Array of Objects</title>
+    </head>
+<body>
+<h2>Compare keys value of an Array of Objects</h2>
+<script>
+    let objArr = [
+        {
+            keyOne: 1,
+            keyTwo: 0,
+            keyThree: 1
+        },
+        {
+            keyOne: 0,
+            keyTwo: 0,
+            keyThree: 1
+        },
+        {
+            keyOne: 1,
+            keyTwo: 0,
+            keyThree: 0
+        }
+    ];
+    let valuesOfArr = [];
+    let objKeys = Object.keys(objArr[0]);
+    console.log(objKeys);
+    objKeys.forEach(elem=> {
+        let val = [];
+        objArr.forEach(ele => {
+            val.push(ele[elem]);
+        });
+        valuesOfArr.push(val);
+    });
+    console.log(valuesOfArr);
+    valuesOfArr.forEach(ele => {
+        let areAllEqual = ele.every( (val, i, arr) => val === arr[0] );
+        console.log(areAllEqual);
+    });
+</script>
+</body>
+</html> 

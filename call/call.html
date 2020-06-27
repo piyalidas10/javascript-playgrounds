@@ -20,6 +20,15 @@
     };
     // borrow function from other method
     person1.display.call(person2); //call pointing to person2 object
+
+    function greeting(text) {
+        console.log(`${text}, I am ${this.firstname} ${this.lastname}`); // ` tilde sign
+    }
+    const obj = {
+        firstname: 'Piyali',
+        lastname: 'Das'
+    };
+    greeting.call(obj, 'Hello');
 </script>
 </body>
 </html> 

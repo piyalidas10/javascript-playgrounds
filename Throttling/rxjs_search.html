@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Throttling with search box Using Rxjs</title>
+        <script src="https://unpkg.com/@reactivex/rxjs@5.0.0-beta.7/dist/global/Rx.umd.js"></script>
+    </head>
+<body>
+<h2>Throttling with search box Using Rxjs</h2>
+<input  id="input" type="text" style="width: 200px; padding: 5px 10px;">
+<p id="target"></p>
+<script>
+    let input = document.getElementById('input');
+    // Listen for keystroke events
+    var input$ = Rx.Observable
+    .fromEvent(input, 'keyup')
+    .map(x => x.currentTarget.value)
+    .throttleTime(500) // with delay of 0.5 secs
+
+    input$.subscribe(x => sendValues(x));
+
+    function sendValues(x){
+        var pp = document.createElement('p');
+        pp.textContent = x;
+        document.getElementById('target').appendChild(pp);
+    }
+
+    </script>
+</body>
+</html> 

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Arrow function is more helpful than Anonymous function</title>
+    </head>
+<body>
+<h2>Arrow function is more helpful than Anonymous function</h2>
+<script>
+    let anonymousFunc = {
+        names: ['Person1', 'Person2'],
+        country: 'India',
+        showPeople() {
+            this.names.forEach(function(ele) {
+                console.log(this);
+                console.log(ele + ' - ' + this.country);
+            });
+        }
+    }
+
+    anonymousFunc.showPeople();
+
+    let arrowFunc = {
+        names: ['Person1', 'Person2'],
+        country: 'India',
+        showPeople() {
+            this.names.forEach(ele => {
+                console.log(this);
+                console.log(ele + ' - ' + this.country);
+            });
+        }
+    }
+    arrowFunc.showPeople();
+    </script>
+</body>
+</html> 

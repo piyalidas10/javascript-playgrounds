@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Anonymous Function Vs Arrow Function</title>
+    </head>
+<body>
+<h2>Anonymous Function Vs Arrow Function</h2>
+<button id="btn1">Click Button Anonymous Function</button>
+<button id="btn2">Click Button Arrow Function</button>
+<script>
+    let anonymousFunc = function() {
+        let a = 10;
+        console.log(this);
+    }
+    let btn1 = document.getElementById('btn1');
+    btn1.addEventListener('click', anonymousFunc);
+
+    let arrowFunc = () => {
+        let a = 10;
+        console.log(this);
+    }
+    let btn2 = document.getElementById('btn2');
+    btn2.addEventListener('click', arrowFunc);
+    </script>
+</body>
+</html> 

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Array map function</title>
+    </head>
+<body>
+<h2>Array map function</h2>
+<script>
+    let fruits = [
+        {name: 'Banana', price: 5, count: 5},
+        {name: 'Apple', price: 12, count: 4},
+        {name: 'Mango', price: 20, count: 2}
+    ];
+    let name = fruits.map(obj => obj.name);
+    let price = fruits.map(obj => obj.price);
+    let totalprice = fruits.map(obj => obj.price*obj.count);
+
+    console.log('Get name array => ', name, ...name);
+    console.log('Get price array => ', price, ...price);
+    console.log('Get totalprice array => ', totalprice, ...totalprice);
+    </script>
+</body>
+</html> 

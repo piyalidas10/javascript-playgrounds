@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Object functions</title>
+    </head>
+<body>
+<h2>Object functions</h2>
+<script>
+    let key = 'gender';
+    let person = {
+        'first name': 'piyali',
+        age: 30,
+        [key]: 'female',
+        greet: function() {
+           alert('Hi');
+        },
+        1.5: 'hello'
+    };
+    console.log(person['gender']);
+    console.log(delete person.age);
+    console.log(person);
+
+    let address = {
+        city: 'kolkata',
+        country: 'india'
+    };
+
+    let newObj = Object.assign({}, person, address);
+    console.log('newObj => ', newObj);
+
+    let fruits = [
+        {name: 'Banana', price: 5, count: 5},
+        {name: 'Apple', price: 12, count: 4},
+        {name: 'Mango', price: 20, count: 2}
+    ];
+
+    let keys = Object.keys(fruits[0]);
+    let values = [];
+    fruits.forEach(ele => {
+        values.push(Object.values(ele));
+    });
+    let valuepairs = [];
+    fruits.forEach(ele => {
+        valuepairs.push(Object.entries(ele));
+    });
+    console.log('Keys => ', keys);
+    console.log('values => ', values);
+    console.log('valuepairs => ', valuepairs);
+</script>
+</body>
+</html> 
