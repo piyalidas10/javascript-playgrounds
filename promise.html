@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Javascript Promise</title>
+    </head>
+<body>
+<h2>Javascript Promise</h2>
+<p>Open console to get the response</p>
+<script>
+    let url = 'https://jsonplaceholder.typicode.com/users';
+    const promise = new Promise((resolve, reject) => {
+        const request = new XMLHttpRequest();
+        request.open('GET', url);
+        request.onload = () => {
+            if (request.status === 200) {
+                resolve(request.response); // we got data here, so resolve the Promise
+            } else {
+                reject(Error(request.statusText)); // status is not 200 OK, so reject
+            }
+        };
+        request.onerror = () => {
+            reject(Error('Error fetching data.')); // error occurred, reject the  Promise
+        };
+
+        request.send(); // send the request
+    });
+
+    promise.then((data) => {
+        console.log('Response => ', JSON.parse(data));
+    }, (error) => {
+        console.log('Promise rejected.');
+        console.log(error.message);
+    });
+</script>
+</body>
+</html> 

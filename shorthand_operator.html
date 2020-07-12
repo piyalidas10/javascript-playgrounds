@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Shorthand operator</title>
+    </head>
+<body>
+<h2>Shorthand operator</h2>
+<input type="text" id="txt"/>
+<button onclick="print()">Click on button</button>
+<h3 id="show"></h3>
+<script>
+    function print() {
+        let name = document.getElementById('txt').value;
+        let username = name || 'Unknown';
+        document.getElementById('show').innerText = "Your name is " + username;
+    }
+</script>
+</body>
+</html> 

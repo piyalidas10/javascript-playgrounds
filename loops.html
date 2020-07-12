@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Javascript Loops</title>
+    </head>
+<body>
+<h2>Javascript Loops</h2>
+<script>
+    arr = [1, 2, 3, 4];
+    console.log('For-of loop --------------------------------------');
+    for(const el of arr) { // execute for every element in an array
+        console.log(el);
+    }
+    console.log('For loop --------------------------------------');
+    for(let i=0; i<arr.length; i++) {
+        console.log(arr[i]);
+    }
+    console.log('For in loop --------------------------------------');
+    obj = [
+        {name: 'One', age: 20},
+        {name: 'Two', age: 21},
+        {name: 'Three', age: 22}
+    ];
+    for(const key in obj) { //execute for every key in an object
+        console.log(key);
+        console.log(obj[key]);
+    }
+</script>
+</body>
+</html> 

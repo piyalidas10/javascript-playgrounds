@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Javascript Promise All</title>
+    </head>
+<body>
+<h2>Javascript Promise All</h2>
+<script>
+    let urls = [
+        'https://jsonplaceholder.typicode.com/users',
+        'https://jsonplaceholder.typicode.com/posts/1'
+    ];
+    const promise1 = new Promise((resolve, reject) => {
+        const request = new XMLHttpRequest();
+        request.open('GET', urls[0]);
+        request.onload = () => {
+            if (request.status === 200) {
+                resolve(request.response); // we got data here, so resolve the Promise
+            } else {
+                reject(Error(request.statusText)); // status is not 200 OK, so reject
+            }
+        };
+        request.onerror = () => {
+            reject(Error('Error fetching data.')); // error occurred, reject the  Promise
+        };
+
+        request.send(); // send the request
+    });
+
+    const promise2 = new Promise((resolve, reject) => {
+        const request = new XMLHttpRequest();
+        request.open('GET', urls[1]);
+        request.onload = () => {
+            if (request.status === 200) {
+                resolve(request.response); // we got data here, so resolve the Promise
+            } else {
+                reject(Error(request.statusText)); // status is not 200 OK, so reject
+            }
+        };
+        request.onerror = () => {
+            reject(Error('Error fetching data.')); // error occurred, reject the  Promise
+        };
+
+        request.send(); // send the request
+    });
+    
+    Promise.all([promise1, promise2])
+    .then(responses => {
+        console.log('responses => ', responses);
+        // respose will get in string format. JSON.parse is used to convert string to JSON format
+        console.log('Promise All Response 1 => ', JSON.parse(responses[0])); 
+        console.log('Promise All Response 2 => ', JSON.parse(responses[1]));
+    });
+</script>
+</body>
+</html> 

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Javascript Promise Race</title>
+    </head>
+<body>
+<h2>Javascript Promise Race</h2>
+<script>
+    let urls = [
+        'https://jsonplaceholder.typicode.com/users',
+        'https://jsonplaceholder.typicode.com/posts/1'
+    ];
+    const promise1 = new Promise((resolve, reject) => {
+        const request = new XMLHttpRequest();
+        request.open('GET', urls[0]);
+        request.onload = () => {
+            if (request.status === 200) {
+                resolve(request.response); // we got data here, so resolve the Promise
+            } else {
+                reject(Error(request.statusText)); // status is not 200 OK, so reject
+            }
+        };
+        request.onerror = () => {
+            reject(Error('Error fetching data.')); // error occurred, reject the  Promise
+        };
+
+        request.send(); // send the request
+    });
+
+    const promise2 = new Promise((resolve, reject) => {
+        const request = new XMLHttpRequest();
+        request.open('GET', urls[1]);
+        request.onload = () => {
+            if (request.status === 200) {
+                resolve(request.response); // we got data here, so resolve the Promise
+            } else {
+                reject(Error(request.statusText)); // status is not 200 OK, so reject
+            }
+        };
+        request.onerror = () => {
+            reject(Error('Error fetching data.')); // error occurred, reject the  Promise
+        };
+
+        request.send(); // send the request
+    });
+
+    /* The Promise.race() method returns a promise that fulfills or rejects as soon as 
+    one of the promises in an iterable fulfills or rejects, with the value or reason from that promise. */
+    Promise.race([promise1, promise2]).then(responses => {
+        // respose will get in string format. JSON.parse is used to convert string to JSON format
+        console.log('Promise Race responses => ', typeof(responses), JSON.parse(responses));
+    });
+</script>
+</body>
+</html> 

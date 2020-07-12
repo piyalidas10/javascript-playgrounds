@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ternary operator</title>
+    </head>
+<body>
+<h2>Ternary operator</h2>
+<button onclick="print(true)">isLogin is True</button>
+<button onclick="print(false)">isLogin is False</button>
+<h3 id="show"></h3>
+<script>
+    function print(val) {
+        let isLogin = val;
+        let username = isLogin? 'Piyali': 'Unknown';
+        document.getElementById('show').innerText = "Your name is " + username;
+    }
+</script>
+</body>
+</html> 
