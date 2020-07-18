@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Array Functions</title>
+    </head>
+<body>
+<h2>Array Functions</h2>
+<script>
+    let userArr = [
+        {id: '001', name:'Ram', email:'ram@gmail.com', age:23, gender: 1},    
+        {id: '002', name:'Ketty', email:'ketty23@gmail.com', age:41, gender: 2},  
+        {id: '003', name:'John', email:'john@gmail.com', age:33, gender: 1},    
+        {id: '004', name:'Kat', email:'kat32@gmail.com', age:28, gender: 2}   
+    ];
+    let genderArr = [
+        {id: 1, title: 'Male'},
+        {id: 2, title: 'Female'}
+    ];
+
+    // Change email is whose name is "John"
+    userArr.map(ele =>  {
+        if(ele.name === 'John') {
+            ele.email = 'john@yahoo.com'
+        }
+    });
+    console.log('userArr => ', userArr);
+
+    // Get the names. It will return array
+    names = userArr.map(ele => ele.name);
+    console.log('names => ', names);
+
+    // Get the details whose age > 30. It will return array
+    ageDetails = userArr.filter(ele => ele.age > 30);
+    console.log('ageDetails => ', ageDetails);
+
+    /* Check from user array if name with "Ram" is exist or not using map and includes
+    includes function always return true/false */
+    isPresent = userArr.map(ele => ele.name).includes('Ram');
+    console.log('isPresent => ', isPresent);
+
+    // Get user info whose name is 'Ram' using filter. It will return array
+    singleUser = userArr.filter(ele => ele.name === 'Ram');
+    console.log('singleUser => ', singleUser);
+
+    // Add position field in user array. If user age is geater than 30, add senior otherwise junior
+    userArr.forEach(ele => {
+        ele.age > 30 ? Object.assign(ele, {position: 'Senior'}) : Object.assign(ele, {position: 'Junior'})
+    });
+    console.log('userArr => ', userArr);
+
+    // Print the use info whose age is less than 30 and add new field position with "Junior" value
+    filterArr = userArr.filter(ele => ele.age < 30).map(ele => Object.assign(ele, {position: 'Junior'}));
+    console.log('filterArr => ', filterArr);
+
+    // Print the user info whose gender is "Female"
+    getId = genderArr.filter(ele => ele.title === 'Female').map(ele => ele.id);
+    console.log('getId => ', getId, ...getId);
+    femaleUsers = userArr.filter(ele => ele.gender === getId[0]);
+    console.log('femaleUsers => ', femaleUsers);
+
+</script>
+</body>
+</html> 
