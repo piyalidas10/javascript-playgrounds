@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Javascript Method invocation pattern</title>
+    </head>
+<body>
+<h2>Javascript Method invocation pattern</h2>
+<script>
+    let dog = {
+        name: 'abc',
+        age: 8,
+        canRun: function() {
+            console.log(this); // this will print the object
+        }
+    }
+    console.log(dog.canRun());
+</script>
+</body>
+</html> 

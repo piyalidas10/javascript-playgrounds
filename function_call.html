@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Javascript Function Call Methods</title>
+    </head>
+<body>
+<h2>Javascript Function Call Methods</h2>
+<h3>These four methods are not applicable to arrow functions</h3>
+<script>
+    function show() {
+        console.log(this);
+        return 10;
+    }
+
+    // Method 1
+    // calling unction as a function is called "Function Invocation Pattern FIP" . 
+    // this  - Global object always.
+    var a = show(); 
+    console.log(a);
+
+
+    // Method 2
+    // constuctor invocation pattern CIP
+    // this - newly created object
+    var b = new show();
+    console.log(b);
+
+    
+    // Method 3
+    // method invocation pattern MIP
+    // this - object before dot
+    let dog = {
+        name: 'abc',
+        age: 8,
+        canRun: function() {
+            console.log(this); // this will print the object
+        }
+    }
+    dog.canRun();
+
+    
+    // Method 4
+    // manually passing value of 'this'
+    // indirectly call the function, Indirect innovation pattern
+    // apply, bind, call
+    let animal = {
+        country: 'India'
+    };
+
+    let tiger = {
+        name: 'abc',
+        age: 8,
+        canRun: function() {
+            console.log(this);
+        }
+    }
+    tiger.canRun.call(animal);
+    tiger.canRun.apply(animal);
+
+    let lion = {
+        name: 'abc',
+        age: 8,
+        canRun: function(param) {
+            console.log(this);
+            console.log(param);
+        }
+    }
+
+    lion.canRun.call(animal, 'hi');
+    lion.canRun.apply(animal, ['how']);
+
+
+</script>
+</body>
+</html> 

@@ -35,7 +35,8 @@
 
     /* Check from user array if name with "Ram" is exist or not using map and includes
     includes function always return true/false */
-    isPresent = userArr.map(ele => ele.name).includes('Ram');
+    // isPresent = userArr.map(ele => ele.name).includes('Ram');
+    isPresent = userArr.find(ele => ele.name === 'Ram')
     console.log('isPresent => ', isPresent);
 
     // Get user info whose name is 'Ram' using filter. It will return array

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Object Array Grouping</title>
+    </head>
+<body>
+<h2>Object Array Grouping</h2>
+<div id="result"></div>
+<script>
+    let ObjArr = [
+        {EmpId: 1, EmpName: 'Sam', Dept: 'Engg', Salary: 1000},
+        {EmpId: 2, EmpName: 'Smith', Dept: 'HR', Salary: 2000},
+        {EmpId: 3, EmpName: 'Denis', Dept: 'Engg', Salary: 4000},
+        {EmpId: 4, EmpName: 'Danny', Dept: 'IT', Salary: 3000},
+        {EmpId: 5, EmpName: 'David', Dept: 'HR', Salary: 4000},
+        {EmpId: 6, EmpName: 'John', Dept: 'IT', Salary: 2000},
+    ];
+    var array_group_by = (records, key) => {
+        Arr = [];
+        let keyArr = [...new Set(records.map(ele => ele[key]))];
+        keyArr.forEach(each => {
+            const createArr = ObjArr.filter(ele => ele[key] === each);
+            Arr.push({gorupname : each, goupvalue : createArr});
+        });
+        return Arr;
+    }
+
+    // Group by Dept
+    groupArr = array_group_by(ObjArr, 'Dept');
+    console.log('Group by Dept -----------------------------');
+    console.log(groupArr);
+
+    resultDiv = document.getElementById('result');
+    let data = "";
+    data += "<table border = '1'>";
+        for(let i = 0; i< groupArr.length; i++) {
+            data += '<tr><th colspan="4">' + groupArr[i].gorupname + '</th></tr>';
+                let objKeys = Object.keys(groupArr[i].goupvalue[0]);
+                data += '<tr>';
+                for(let k=0; k<objKeys.length; k++) {
+                        data += '<th>' + objKeys[k] + '</th>';
+                }
+                data += '</tr>';
+                for (let j=0; j<groupArr[i].goupvalue.length; j++) {
+                    data += '<tr>';
+                    for(let k=0; k<objKeys.length; k++) {
+                        data += '<td>' + groupArr[i].goupvalue[j][objKeys[k]] + '</td>';
+                    }
+                    data += '</tr>';         
+                }
+        }
+        data.innerHTML += '</table>';  
+    resultDiv.innerHTML = data;
+</script>
+</body>
+</html> 

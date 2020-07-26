@@ -27,3 +27,8 @@ Funtion.prototype.myunction = function() {
 
 }
 ```
+
+https://medium.com/dailyjs/how-to-remove-array-duplicates-in-es6-5daa8789641c
+
+## ng-India Webinar - Master 5 Most Popular Concepts of JavaScript
+https://www.youtube.com/watch?v=F2V7MgehDSY

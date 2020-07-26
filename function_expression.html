@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Javascript Function Expression</title>
+    </head>
+<body>
+<h2>Javascript Function Expression</h2>
+<script>
+
+    // You will get type erroror calling show function
+    // console.log(show);
+    // show();
+    // let show = function() {
+    //     console.log(this);
+    // }
+
+    // Correct method
+    let show1 = function() {
+        console.log(this);
+    }
+    show1();
+    var a = new show1();
+    console.log(a);
+
+    // showing correct method with hoisting. why calling show1 function after function expression is needed
+    // Hoisting method break it into two statements 1. delaration 2. expression. put expression part at top of the page
+    
+    // let show1 = undefined;
+    // show1 = function() {
+    //     console.log(this);
+    // }
+    // show1();
+
+
+</script>
+</body>
+</html> 
