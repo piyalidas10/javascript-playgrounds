@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Object freeze</title>
+    </head>
+<body>
+<h2>Object freeze</h2>
+<script> 
+    // with Object.freeze
+    const software1 = Object.freeze({
+        name: 'Gmail', 
+        company: {
+            name: 'Google'
+        }
+    });
+    software1.name = 'Outlook'; // can't reassign 
+    software1.company.name = 'Microsoft'; // can reassign nested objects
+    console.log(software1); 
+    
+</script>
+</body>
+</html> 

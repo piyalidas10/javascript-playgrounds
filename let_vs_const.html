@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>let vs const</title>
+    </head>
+<body>
+<h2>let vs const</h2>
+<p>You can't reassign const variable</p>
+<script>
+    // with let variable
+    let software1 = {
+        name: 'Gmail', 
+        company: {
+            name: 'Google'
+        }
+    };
+    software1.name = 'Apple';
+    console.log(software1);
+
+    /*
+    Result with let variable
+    company: {
+        name: "Google"
+    }
+    name: "Apple"
+    */
+
+    software1 = { name : 'Hi'};
+    console.log(software1);
+
+    /* result
+    {name: "Hi"}
+    */
+    
+
+    // with const variable
+    const software2 = {
+        name: 'Gmail', 
+        company: {
+            name: 'Google'
+        }
+    };
+    software2.name = 'Apple';
+    console.log(software2); 
+
+    /*
+    Result with const variable
+    company: {
+        name: "Google"
+    }
+    name: "Apple"
+    */
+
+    software2 = { name : 'Hi'};
+    console.log(software2); // get error "let_vs_const.html:49 Uncaught TypeError: Assignment to constant variable."
+    
+</script>
+</body>
+</html> 
