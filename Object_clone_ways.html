@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>3 ways to clone object</title>
+    </head>
+<body>
+<h2>3 ways to clone object</h2>
+<script>
+    let person = {
+        name: 'Piyali',
+        dept: 'IT'
+    };
+    
+    // spread operator
+    console.log('Clone object using spread operator => ', {...person});
+
+    // Object.assign
+    console.log('Clone object using Object.assign => ', Object.assign({}, person));
+
+    // JSON
+    console.log('Clone object using spread operator => ', JSON.parse(JSON.stringify(person)));
+</script>
+</body>
+</html> 
