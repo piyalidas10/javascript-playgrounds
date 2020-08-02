@@ -133,6 +133,21 @@
 
     console.table(studentInfoArr);
 
+    /* 
+        Example no 4 -----------------------------
+        Calling Function without Apply
+    */
+    let txt = ['Hi!', 'How are you ?'];
+    function showWithApply(txt1, txt2) {
+        console.log(txt1 + ' ' + txt2);
+    }
+    showWithApply.apply(null, txt);
+
+    function showWithoutApply(txt1, txt2) {
+        console.log(txt1 + ' ' + txt2);
+    }
+    showWithoutApply(...txt);
+
 </script>
 </body>
 </html> 

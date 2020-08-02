@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Spread operator in function arguments</title>
+    </head>
+<body>
+<h2>Spread operator in function arguments</h2>
+<script>
+    let studentArr = [
+        {
+            stud_id : 1,
+            stud_name: 'Student 1',
+            stud_marks: 60
+        },
+        {
+            stud_id : 2,
+            stud_name: 'Student 2',
+            stud_marks: 55
+        },
+        {
+            stud_id : 3,
+            stud_name: 'Student 3',
+            stud_marks: 76
+        },
+        {
+            stud_id : 4,
+            stud_name: 'Student 4',
+            stud_marks: 87
+        },
+        {
+            stud_id : 5,
+            stud_name: 'Student 5',
+            stud_marks: 90
+        }
+    ];
+    let showmark = ({stud_name, stud_marks}) => {
+        console.log(stud_name + ' has got total ' + stud_marks + ' marks');
+    }
+    studentArr.forEach(ele => showmark({...ele}));
+</script>
+</body>
+</html>
