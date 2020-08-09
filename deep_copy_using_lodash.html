@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Deep copy in Javascript using Lodash</title>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.19/lodash.min.js"></script>
+</head>
+
+<body>
+    <h2>Deep copy in Javascript using Lodash</h2>
+    <script>
+        // Deep copy using Lodash
+        const animals_lodash = {
+            category: 'wild',
+            name: {
+                animal: 'Tiger'
+            }
+        };
+        let cloneAnimals = _.cloneDeep(animals_lodash);
+
+        cloneAnimals.name.animal = 'Lion';
+        console.log(cloneAnimals.name.animal);
+        console.log('Current Object => ', cloneAnimals);
+        console.log(animals_lodash.name.animal);
+        console.log('Original Object => ', animals_lodash);
+    </script>
+</body>
+
+</html>

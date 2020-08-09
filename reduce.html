@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Reduce operator uses</title>
+    </head>
+<body>
+<h2>Reduce operator uses</h2>
+<script>
+    function multiply(arg) {
+        let result = arg.reduce(function(accumulator, currentvalue) {
+            return accumulator * currentvalue;
+        });
+        console.log(result);
+    }
+    multiply([1, 2]);
+    multiply([1, 2, 5]);
+</script>
+</body>
+</html> 

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Spread vs Rest operator</title>
+    </head>
+<body>
+<h2>Spread vs Rest operator</h2>
+<ul>
+    <li>Rest Parameter is collecting all remaining elements into an array .</li>
+    <li>Spread Operator is unpacking collected elements such as arrays into single elements</li>
+</ul>
+<script>
+    /*
+        Example 1
+    */
+    var fruits = ['Mango', 'Banana', 'Apple', 'Pipneapple'];
+    function getFruitNames(firstName , ...lastNames) { // Rest operator ------ collects all remaining elements into an array
+        console.log(firstName);
+        console.log(lastNames);
+    }
+    getFruitNames(...fruits); // Spread operator ------- spread or expands array into its elements
+
+    var personNames = ['Person 1' , 'Person 2' , 'Person 3'];
+    var newArr = [...personNames ,'Wese Bengal' , 'India'];
+    console.log(newArr) ;
+
+    function getPeronNames(...firstNames, lastName) {
+        console.log(firstNames);
+        console.log(lastName);
+    }
+    getPeronNames(...newArr);
+</script>
+</body>
+</html> 

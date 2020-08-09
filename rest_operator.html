@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rest operator uses</title>
+    </head>
+<body>
+<h2>Rest operator uses</h2>
+<script>
+    /*
+        Rest parameter example 1
+    */
+    function getFruitNames(firstName , ...lastNames) {
+        console.log(firstName);
+        console.log(lastNames);
+    }
+    getFruitNames('Mango', 'Banana', 'Apple', 'Pipneapple');
+
+    /*
+        Rest parameter example 2
+    */
+
+    // passing arguments are needed to convert array
+    function multiply() {
+        let arg = Array.from(arguments);
+        let result = arg.reduce(function(accumulator, currentvalue) {
+            return accumulator * currentvalue;
+        });
+        console.log(result);
+    }
+    multiply(1, 2);
+    multiply(1, 2, 5);
+
+    // using rest operator is no needed to convert array
+    function multiply_rest(...arg) {
+        let result = arg.reduce(function(accumulator, currentvalue) {
+            return accumulator * currentvalue;
+        });
+        console.log(result);
+    }
+    multiply_rest(1, 2);
+    multiply_rest(1, 2, 5);
+
+    /*
+        Rest parameter example 3
+    */
+
+    function sum(a, b) {
+        return a + b;
+    }
+
+    console.log(sum(1, 2)); // results 3
+    console.log(sum(1, 2, 5)); // results 3 becuase only taking first two parameters, other parameters are being ignored
+
+    function sum_rest(...input){ 
+        let sum = 0; 
+        for(let i of input){ 
+            sum+=i; 
+        } 
+        return sum; 
+    }
+    console.log(sum_rest(1, 2)); // results 3
+    console.log(sum_rest(1, 2, 5)); // results 8
+
+</script>
+</body>
+</html> 

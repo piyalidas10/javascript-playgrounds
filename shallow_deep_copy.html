@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Shallow copy Vs Deep copy in Javascript</title>
+        <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.19/lodash.min.js"></script>
+    </head>
+<body>
+<h2>Shallow copy Vs Deep copy in Javascript</h2>
+<script>
+    /*
+    Example of Shallow copy
+
+    */
+    const animals_shallow = {
+        category: 'domestic',
+        name: {
+            animal : 'Cow'
+        }
+    };
+
+    // copy object using Object.assign
+    let printAnimal = Object.assign({}, animals_shallow);
+    console.log(printAnimal);
+
+    printAnimal.category = 'wild';
+    console.log(printAnimal.category);
+    console.log(animals_shallow.category);
+
+    printAnimal.name.animal = 'Dog';
+    console.log(printAnimal.name.animal);
+    console.log(animals_shallow.name.animal);
+
+    
+    
+
+    // copy object using spread operator
+    const animals = {
+        category: 'domestic',
+        name: {
+            animal : 'Cow'
+        }
+    };
+    let printAnimal_spread = {...animals};
+    console.log(printAnimal_spread);
+
+    printAnimal_spread.name.animal = 'Goat';
+    console.log(printAnimal_spread.name.animal);
+    console.log(animals.name.animal);
+    console.log(animals);
+
+
+    // Deep copy using Lodash
+    const animals_lodash = {
+        category: 'wild',
+        name: {
+            animal : 'Tiger'
+        }
+    };
+    let cloneAnimals = _.cloneDeep(animals_lodash);
+
+    cloneAnimals.name.animal = 'Lion';
+    console.log(cloneAnimals.name.animal);
+    console.log('Current Object => ', cloneAnimals);
+    console.log(animals_lodash.name.animal);
+    console.log('Original Object => ', animals_lodash);
+</script>
+</body>
+</html> 
