@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Javascript Modal</title>
+    <style>
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1050;
+            display: none;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            outline: 0;
+        }
+        .modal-backdrop {
+            position: fixed;
+            background:rgba(0, 0, 0, .6);
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+        .modal.show {
+            display: block;
+        }
+
+        .modal-content {
+            position: relative;
+            display: block;
+            width: 100%;
+            pointer-events: auto;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(0, 0, 0, .2);
+            border-radius: .3rem;
+            outline: 0;
+            z-index: 100;
+        }
+
+        .modal-dialog {
+            position: relative;
+            width: auto;
+            margin: 1.75rem auto;
+            pointer-events: none;
+            max-width: 500px;
+        }
+
+        .modal-header {
+            display: block;
+            padding: 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .modal-title {
+            margin: 0;
+        }
+        .close {
+            float: right;
+            font-size: 21px;
+            font-weight: 700;
+            line-height: 1;
+            color: #000;
+        }
+        .modal-body {
+            position: relative;
+            padding: 1rem;
+            display: block;
+        }
+
+        .modal-footer {
+            padding: 15px;
+            text-align: right;
+            border-top: 1px solid #dee2e6;
+        }
+        .txtbox {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Javascript Modal</h2>
+    <button id="btn">Open Modal</button>
+
+    <div class="modal" id="modalPopup">
+        <div class="modal-backdrop" id="backdrop"></div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close">&times;</button>
+                    <h4 class="modal-title">Modal Heading</h4>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form>
+                        <input type="text" class="txtbox" id="txtbox"/>
+                    </form>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="save">Save</button>
+                    <button type="button" class="cancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const btnId = document.getElementById('btn');
+        const modalId = document.getElementById('modalPopup');
+        const backdropId = document.getElementById('backdrop');
+        const btnCloseNodes = document.querySelectorAll('.close, .cancel');
+        const btnSave = document.querySelector('.save');
+
+        console.log(btnCloseNodes);
+        btnId.addEventListener('click', () => {
+            modalId.classList.toggle('show');
+        });
+        backdropId.addEventListener('click', () => {
+            modalId.classList.toggle('show');
+        });
+        btnCloseNodes.forEach(ele => {
+            ele.addEventListener('click', () => {
+                modalId.classList.toggle('show');
+            });
+        });
+        btnSave.addEventListener('click', () => {
+            let result = [];
+            let val = document.querySelector('.txtbox').value;
+            result.push(val);
+            console.log('Testbox value => ', result);
+            modalId.classList.toggle('show');
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Change Font using javascript</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="text-center">Change Font using javascript</h2>
+        <div class="row form-group">
+            <div class="col-md-8 m-auto">
+                <div class="row">
+                    <div class="col-md-4 fontstyle">
+                    </div>
+                    <div class="col-md-4 fontsize">
+                    </div>
+                    <div class="col-md-4 fontweight">
+                    </div>
+                </div>
+            </div>
+        </div>
+        HTML isn't computer code
+        <p>HTML isn't computer code, but is a language that uses US English to enable texts (words, images, sounds) to
+            be inserted and formatting such as colo(u)r and centre/ering to be written in. The process is fairly simple;
+            the main difficulties often lie in small mistakes - if you slip up while word processing your reader may
+            pick up your typos, but the page will still be legible. However, if your HTML is inaccurate the page may not
+            appear - writing web pages is, at the least, very good practice for proof reading!</p>
+            <p>Learning HTML will enable you to:</p>
+            <ul>
+                <li>create your own simple pages</li>
+                <li>read and appreciate pages created by others</li>
+                <li>develop an understanding of the creative and literary implications of web-texts</li>
+                <li>have the confidence to branch out into more complex web design</li>
+            </ul>
+                <h1>Enter the main heading, usually the same as the title.</h1>
+                <p>Be <b>bold</b> in stating your key points. Put them in a list: </p>
+                <ul>
+                    <li>The first item in your list</li>
+                    <li>The second item; <i>italicize</i> key words</li>
+                </ul>
+                <p>Improve your image by including an image. </p>
+                <p>Add a link to your favorite <a href="https://www.dummies.com/">Web site</a>.
+                    Break up your page with a horizontal rule or two. </p>
+                <hr>
+                <p>&#169; Wiley Publishing, 2011</p>
+    </div>
+    <script>
+        let fontStyles = ['normal', 'italic', 'oblique'];
+        let fontWeights = ['normal', 'bold', 'bolder'];
+        let fontSizes = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+
+        // Create Fontstyle select box
+        let fontStyleLabel = document.createElement("label");
+        fontStyleLabel.textContent = 'Font Style';
+        document.querySelector('.fontstyle').appendChild(fontStyleLabel);
+        let fontStyleSelect = document.createElement("select");
+        fontStyleSelect.setAttribute('class', 'style form-control');
+        for(let i = 0; i < fontStyles.length; i++) {
+            let el = document.createElement("option");
+            el.textContent = fontStyles[i];
+            el.value = fontStyles[i];
+            fontStyleSelect.appendChild(el);
+        }
+        document.querySelector('.fontstyle').appendChild(fontStyleSelect);
+        document.querySelector('.style').onchange = (ele) => {
+            document.body.style.fontStyle = ele.target.value;
+        }
+
+        // Create Fontweight select box
+        let fontWeightLabel = document.createElement("label");
+        fontWeightLabel.textContent = 'Font Weight';
+        document.querySelector('.fontweight').appendChild(fontWeightLabel);
+        let fontWeightSelect = document.createElement("select");
+        fontWeightSelect.setAttribute('class', 'weight form-control');
+        for(let i = 0; i < fontWeights.length; i++) {
+            let el = document.createElement("option");
+            el.textContent = fontWeights[i];
+            el.value = fontWeights[i];
+            fontWeightSelect.appendChild(el);
+        }
+        document.querySelector('.fontweight').appendChild(fontWeightSelect);
+        document.querySelector('.weight').onchange = (ele) => {
+            document.body.style.fontWeight = ele.target.value;
+        }
+
+        // Create Fontsize select box
+        let fontSizeLabel = document.createElement("label");
+        fontSizeLabel.textContent = 'Font Size';
+        document.querySelector('.fontsize').appendChild(fontSizeLabel);
+        let fontSizeSelect = document.createElement("select");
+        fontSizeSelect.setAttribute('class', 'size form-control');
+        for(let i = 0; i < fontSizes.length; i++) {
+            let el = document.createElement("option");
+            el.textContent = fontSizes[i] + 'px';
+            el.value = fontSizes[i];
+            fontSizeSelect.appendChild(el);
+        }
+        document.querySelector('.fontsize').appendChild(fontSizeSelect);
+        document.querySelector('.size').onchange = (ele) => {
+            document.body.style.fontSize = ele.target.value + 'px';
+        }
+    </script>
+</body>
+</html>
