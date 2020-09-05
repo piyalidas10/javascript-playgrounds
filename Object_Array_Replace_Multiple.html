@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Replace Object value of matching employee names</title>
+    </head>
+<body>
+<h2>Replace Object value of matching employee names</h2>
+<script>
+    let ObjArr = [
+        {EmpId: 1, EmpName: 'Sam', Dept: 'Engg', Salary: 1000},
+        {EmpId: 2, EmpName: 'Smith', Dept: 'HR', Salary: 2000},
+        {EmpId: 3, EmpName: 'David', Dept: 'Engg', Salary: 4000},
+        {EmpId: 4, EmpName: 'Danny', Dept: 'IT', Salary: 3000},
+        {EmpId: 5, EmpName: 'David', Dept: 'HR', Salary: 4000},
+        {EmpId: 6, EmpName: 'John', Dept: 'IT', Salary: 2000},
+    ];
+
+    // find array whose EmpName is 'David'
+    const matchingArr = ObjArr.filter(ele => ele.EmpName === 'David');
+    console.log(matchingArr);
+
+    // Replace value the matching index using newObj
+    newObj = {EmpId: 5, EmpName: 'David', Dept: 'EC', Salary: 14000};
+    matchingArr.forEach()
+
+    // console.table(ObjArr);
+</script>
+</body>
+</html> 

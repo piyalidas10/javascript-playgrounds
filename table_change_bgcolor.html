@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Change Table background color with respective Group Names</title>
+    </head>
+<body>
+<h2>Change Table backgroung color with respective Group Names</h2>
+<div id="result"></div>
+<script>
+    let ObjArr = [
+        {EmpId: 1, EmpName: 'Sam', Dept: 'Engg', Salary: 1000},
+        {EmpId: 2, EmpName: 'Smith', Dept: 'HR', Salary: 2000},
+        {EmpId: 3, EmpName: 'Denis', Dept: 'Engg', Salary: 4000},
+        {EmpId: 4, EmpName: 'Danny', Dept: 'IT', Salary: 3000},
+        {EmpId: 5, EmpName: 'David', Dept: 'HR', Salary: 4000},
+        {EmpId: 6, EmpName: 'John', Dept: 'IT', Salary: 2000},
+    ];
+
+    console.table(ObjArr);
+
+    let objKeys = Object.keys(ObjArr[0]);
+    console.log(objKeys);
+    let colors = {Engg: '#F0E68C', HR: '#98FB98', IT: '#FAEBD7'};
+
+
+    resultDiv = document.getElementById('result');
+    let data = "";
+    data += "<table border = '1' cellspacing='0' cellpadding='4'>";
+        data += '<tr>';
+                for(let i = 0; i< objKeys.length; i++) {
+                    data += '<th>' + objKeys[i] + '</th>';
+                }
+                data += '</tr>';
+        for(let k = 0; k< ObjArr.length; k++) {
+                let objValues = Object.values(ObjArr[k]);
+                data += '<tr bgcolor="' + colors[ObjArr[k].Dept] + '">';
+                for (let j=0; j<objValues.length; j++) {
+                    data += '<td>' + objValues[j] + '</td>';        
+                }
+                data += '</tr>';
+        }
+        data.innerHTML += '</table>';  
+    resultDiv.innerHTML = data;
+</script>
+</body>
+</html> 

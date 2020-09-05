@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Javascript Promise Race</title>
+        <title>Javascript Promise allSettled</title>
     </head>
 <body>
-<h2>Javascript Promise Race</h2>
-<p>The Promise.race() method returns a promise that fulfills or rejects as soon as one of the promises in an iterable fulfills or rejects, with the value or reason from that promise.</p>
+<h2>Javascript Promise allSettled</h2>
+<p>The Promise.allSettled() method returns a promise that resolves after all of the given promises have either fulfilled or rejected, with an array of objects that each describes the outcome of each promise.</p>
+
+<p>It is typically used when you have multiple asynchronous tasks that are not dependent on one another to complete successfully, or you'd always like to know the result of each promise.</p>
+    
+    <p>In comparison, the Promise returned by Promise.all() may be more appropriate if the tasks are dependent on each other / if you'd like to immediately reject upon any of them rejecting.</p>
 <script>
     let urls = [
         'https://jsonplaceholder.typicode.com/users',
@@ -44,12 +48,13 @@
 
         request.send(); // send the request
     });
-
-    /* The Promise.race() method returns a promise that fulfills or rejects as soon as 
-    one of the promises in an iterable fulfills or rejects, with the value or reason from that promise. */
-    Promise.race([promise1, promise2]).then(responses => {
+    
+    Promise.allSettled([promise1, promise2])
+    .then(responses => {
+        console.log('responses => ', responses);
         // respose will get in string format. JSON.parse is used to convert string to JSON format
-        console.log('Promise Race responses => ', typeof(responses), JSON.parse(responses));
+        console.log('Promise All Response 1 => ', JSON.parse(responses[0].value)); 
+        console.log('Promise All Response 2 => ', JSON.parse(responses[1].value));
     });
 </script>
 </body>
