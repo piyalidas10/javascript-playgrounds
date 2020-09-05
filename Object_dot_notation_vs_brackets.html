@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Object : dot notation vs. brackets</title>
+    </head>
+<body>
+<h2>Object : dot notation vs. brackets</h2>
+<script>
+    let fruits = [
+        {name: 'Banana', price: 5, count: 5},
+        {name: 'Apple', price: 12, count: 4},
+        {name: 'Mango', price: 20, count: 2}
+    ];
+
+    // print object values with dot notation.
+    let nameValues = fruits.map(ele => ele.name);
+    console.log('Name field values => ', nameValues);
+
+    // square bracket notation is useful when dealing with property names which will be dynamic
+    function displayKeyValues(keyName) {
+        let values = fruits.map(ele => ele[keyName]);
+        console.log(keyName + ' values => ', values);
+    }
+    displayKeyValues('name');
+    displayKeyValues('price');
+    displayKeyValues('count');
+
+    /* The property name is assigned to a variable and 
+        you want to access the property value by this variable
+    */
+    let obj = {'firstname': 'Joe', 'lastName': 'Brown', 'age': 30};
+    let myname = 'firstname';
+    console.log('firstname with dot notation => ', obj.myname);
+    console.log('firstname with brackets => ', obj[myname]);
+</script>
+</body>
+</html> 

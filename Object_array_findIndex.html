@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Replace Object value of matching employee id</title>
+    </head>
+<body>
+<h2>Replace Object value of matching employee id</h2>
+<script>
+    let ObjArr = [
+        {EmpId: 1, EmpName: 'Sam', Dept: 'Engg', Salary: 1000},
+        {EmpId: 2, EmpName: 'Smith', Dept: 'HR', Salary: 2000},
+        {EmpId: 3, EmpName: 'Denis', Dept: 'Engg', Salary: 4000},
+        {EmpId: 4, EmpName: 'Danny', Dept: 'IT', Salary: 3000},
+        {EmpId: 5, EmpName: 'David', Dept: 'HR', Salary: 4000},
+        {EmpId: 6, EmpName: 'John', Dept: 'IT', Salary: 2000},
+    ];
+
+    // find index whose EmpName is 'David'
+    const matchingIndex = ObjArr.findIndex(ele => ele.EmpName === 'David');
+    console.log(matchingIndex);
+
+    // Replace value the matching index using newObj
+    newObj = {EmpId: 5, EmpName: 'David', Dept: 'EC', Salary: 14000};
+    if (matchingIndex !== -1) {
+      Object.assign(ObjArr[matchingIndex], newObj);
+    }
+
+    console.table(ObjArr);
+</script>
+</body>
+</html> 

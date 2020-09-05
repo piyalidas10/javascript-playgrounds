@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>𝑫𝑶𝑻 𝒗𝒔 𝑩𝑹𝑨𝑪𝑲𝑬𝑻 𝒏𝒐𝒕𝒂𝒕𝒊𝒐𝒏 𝒊𝒏 #𝒋𝒂𝒗𝒂𝒔𝒄𝒓𝒊𝒑𝒕</title>
+    </head>
+<body>
+<h2>𝑫𝑶𝑻 𝒗𝒔 𝑩𝑹𝑨𝑪𝑲𝑬𝑻 𝒏𝒐𝒕𝒂𝒕𝒊𝒐𝒏 𝒊𝒏 #𝒋𝒂𝒗𝒂𝒔𝒄𝒓𝒊𝒑𝒕</h2>
+<pre>
+Most of us have learned that we can access the property of an Object using either dot or bracket notation and both are the same.
+
+This is true in most cases, but there are some edge cases in which these two differ.
+
+It's only when we make a mistake, we realize the difference...𝒂𝒏𝒅 𝒕𝒉𝒂𝒕'𝒔 𝒕𝒐𝒕𝒂𝒍𝒍𝒚 𝒂𝒍𝒍 𝒓𝒊𝒈𝒉𝒕.
+
+I am sharing the learning from my mistake:
+
+If you try to access the property value by providing the property name as a variable in the dot notation, you will get undefined, which is not the case with bracket notation.
+
+Screenshot attached.
+</pre>
+<pre>
+Its because of the way it is processed. While with dot notation it will continue fetching from left to right. 
+So first it will look for name then inside that next thing specified after dot i.e. printname property and so on if more is there.
+
+But with bracket notation before directly looking for that property, it will first evaluate that bracket part and then fetch it. 
+So that's why we can give variables and even expressions in bracket notation.
+</pre>
+<script>
+    let name = {
+        'firstname': 'Piyali',
+        'lastname': 'Das'
+    };
+    let printname = 'firstname';
+
+    console.log(name.printname);
+    console.log(name[printname]);
+</script>
+</body>
+</html>    
