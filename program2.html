@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Compare Arrays</h2>
+<p>Open console to check</p>
+<script>
+    let originalArr = [
+        {id: 1, name:'test1', value1: 10, value2: 20, value3: 10},
+        {id: 2, name:'test2', value1: 0, value2: 20, value3: 10},
+        {id: 3, name:'test3', value1: 10, value2: 0, value3: 10},
+        {id: 4, name:'test4', value1: 10, value2: 20, value3: 10},
+    ];
+
+    // Get the fields who value is 0
+    filteredArr = originalArr.filter(ele => !Object.values(ele).includes(0));
+    console.log('filteredArr => ', filteredArr);
+
+    //let removedFields = [value, currency];
+    // let updatedItems = originalItems.filter(ele => removedItems.includes(ele));
+</script>
+</body>
+</html> 

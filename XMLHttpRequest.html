@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #products li {
+                display: inline-block;
+                width: 20%;
+                text-align: center;
+            }
+            .productImg{
+                max-width: 100%;
+                height: 100px;
+            }
+            .error{
+                color: red;
+            }
+        </style>
+    </head>
+<body>
+
+<h2>Javascript XMLHttpRequest</h2>
+<p>Open Console to check</p>
+<ul id="products"></ul>
+<script>
+    function createNode(element) {
+        return document.createElement(element);
+    }
+
+    function append(parent, el) {
+    return parent.appendChild(el);
+    }
+    // function to create DOM for response products
+    function createDOM(ul, product) {
+        let li = createNode('li'),
+                img = createNode('img'),
+                h4 = createNode('h4'),
+                span = createNode('span');
+            img.src = product.img;
+            img.setAttribute("class", "productImg");
+            h4.innerHTML = `${product.Title}`;
+            span.innerHTML = `${product.Description}`;
+            append(li, img);
+            append(li, h4);
+            append(li, span);
+            append(ul, li);
+    }
+
+    function errorDiv(error) {
+        let p = createNode('p');
+        p.setAttribute("class", "error");
+        p.innerHTML = error;
+        append(document.body, p);
+    }
+
+    // function to handle success
+    function success() {
+        var products = JSON.parse(this.responseText); //parse the string to JSON
+        console.log(products);
+        const ul = document.getElementById('products');
+        products.forEach(product => {
+            createDOM(ul, product); 
+        });
+    }
+
+    // function to handle error
+    function error(err) {
+        errorDiv(err);
+        console.log('Request Failed', err); //error details will be in the "err" object
+    }
+
+    function get(url) {
+        const xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() { 
+            if (this.readyState === 4) {
+                if (this.status === 200) {
+                    xmlHttp.onload = success; // call success function if request is successful
+                } else if (this.response == null && this.status === 0) {
+                    console.log("The computer appears to be offline.");
+                    xmlHttp.onerror = error("The computer appears to be offline.");  // call error function if request failed
+                } else {
+                    xmlHttp.onerror = error(this.response);  // call error function if request failed
+                }
+            }
+        }
+        xmlHttp.open( "GET", url, true );
+        xmlHttp.send( null );
+    }
+    const theUrl = 'https://raw.githubusercontent.com/dotnet-presentations/ContosoCrafts/master/src/wwwroot/data/products.json';
+    get(theUrl);
+    
+</script>
+</body>
+</html> 

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Variable with Question Mark</h2>
+<p>Open console to check</p>
+<script>
+    let obj = {
+        department: 'IT',
+        // students: [
+        //     {
+        //         name: 'Student 1',
+        //         roll: 1
+        //     },
+        //     {
+        //         name: 'Student 2',
+        //         roll: 2
+        //     },
+        //     {
+        //         name: 'Student 3',
+        //         roll: 3
+        //     }
+        // ]
+    };
+    
+    //get the student roll of 'Student 2'
+    let studentInfo = obj?.students?.find(student => student.name === 'Student 1');
+    console.log('studentInfo => ', studentInfo);
+</script>
+</body>
+</html> 

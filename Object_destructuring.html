@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Object Destructuring</h2>
+<p>Open console to check</p>
+<script>
+    const person = {
+        firstName: 'Piyali',
+        lastName: 'Das',
+        address: {
+            city: 'Kolkata',
+            state: 'West Bengal'
+        }
+    };
+
+    // Why need Destructuring. You can do it using Normal Method
+    const fname = person.firstName;
+    const lname = person.lastName;
+    console.log('Without Destructuring => ', fname + ' ' + lname);
+
+    // With Destructuring
+    const {firstName, lastName} = person;
+    console.log('Destructuring => ', firstName + ' ' + lastName);
+
+    /* With Destructuring..But returns value "Undefined" 
+    because the property "param1" and "param2" doesn’t exist in the object name. */
+    const {param1, param2} = person;
+    console.log('Destructuring with diferent names => ', param1 + ' ' + param2);
+
+    /*
+        Destructuring with Alias --------
+        If you’d like to create variables of different names than the properties, 
+        then you can use the aliasing feature of object destructuring.
+    */
+    const { firstName: param3, lastName: param4 } = person;
+    console.log('Destructuring with Aliases => ', param3 + ' ' + param4);
+
+    // Destructuring with nested objects
+    const { address: { city } } = person;
+    console.log('Destructuring Address => ', city);
+
+    /* Destructuring using Spread Operator. 
+        Other will print : 
+        {employee_id: "111111", address: {…}}
+    */
+    const employee = {
+        employee_name: 'Piyali Das',
+        employee_id: '111111',
+        address: {
+            city: 'Kolkata',
+            state: 'West Bengal'
+        }
+    };
+    const {employee_name, ...other} = employee;
+    console.log('Destructuring Other Values => ', other);
+
+</script>
+</body>
+</html> 

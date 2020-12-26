@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Logest Substring without repeating characters</h2>
+<script>
+    // let str = 'abcabcbb';
+    // let str = 'bbbb';
+    // let str = 'pwwkew';
+    // let str = 'abca';
+    let str = 'ababccd';
+    let multipleSub = [];
+    let sub = [];
+    for(let i=0; i < str.length; i++) {
+       temp = str.substr(i, 1);
+       if(!sub.includes(temp)) {
+            sub.push(temp);
+       } else if(multipleSub.length > 0) {
+            multipleSub.forEach(ele => {
+                duplicate = ele.includes(temp);
+            });
+            console.log(duplicate);
+            if(duplicate) {
+                sub = [];
+            }
+       } else {
+            multipleSub.push(sub);
+            sub = [];
+       }
+    }
+    // console.log('String => ', sub.join(''), sub.length);
+    console.log('multipleSub => ', multipleSub);
+</script>
+</body>
+</html> 

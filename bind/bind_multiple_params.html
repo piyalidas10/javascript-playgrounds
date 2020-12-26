@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Bind with multiple parameters</h2>
+<p>Open console to check</p>
+<script>
+    function display(param1, param2) {
+        console.log('param1 => ', param1);
+        console.log('param2 => ', param2);
+    }
+
+    let one = display.bind(null, 'Piyali', 'Kolkata');
+    one();
+</script>
+</body>
+</html> 

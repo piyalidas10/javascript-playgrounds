@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Javascript Drag and Drop</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+            h2 {text-align: center;}
+            .box{
+                background-color: #eeeeee;
+                border: #cccccc 1px solid;
+                padding: 15px;
+            }
+            .taskbox {
+                list-style: none;
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+            #todo, #inprogress, #intesting, #done {
+                min-height: 300px;
+            }
+            #todo .taskbox {
+                background-color: #ffffff;
+            }
+            #inprogress .taskbox {
+                background-color: #bdf3c9;
+            }
+            #intesting .taskbox {
+                background-color: #fbf1d5;
+            }
+            #done .taskbox {
+                background-color: #fdd5d5;
+            }
+        </style>
+    </head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8"></div>
+        <div class="col-sm-4"></div>
+    </div>
+    <h2>Javascript Drag and Drop</h2>
+    <div class="row">
+      <div class="col-sm-3">
+          <div class="box">
+              <h4>ToDo</h4>
+              <div id="todo"
+              ondragover="onDragOver(event);"
+              ondrop="onDrop(event);"
+              ></div>
+          </div>
+      </div> 
+      <div class="col-sm-3">
+        <div class="box">
+            <h4>In Progress</h4>
+            <div id="inprogress"
+            ondragover="onDragOver(event);"
+              ondrop="onDrop(event);"
+            ></div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="box">
+            <h4>In Testing</h4>
+            <div id="intesting"
+            ondragover="onDragOver(event);"
+              ondrop="onDrop(event);"
+            ></div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="box">
+            <h4>Done</h4>
+            <div id="done"
+            ondragover="onDragOver(event);"
+              ondrop="onDrop(event);"
+            ></div>
+        </div>
+      </div>
+    </div>
+</div>
+<script>
+    let stepsArr = [
+        {stepid: 1, name: 'todo'},
+        {stepid: 1, name: 'inprogress'},
+        {stepid: 1, name: 'intesting'},
+        {stepid: 1, name: 'done'},
+    ]
+    let todoArr = [], inprogresArr = [], doneArr = [];
+    todoArr = [
+        {id:1, title: 'task 1'},
+        {id:2, title: 'task 2'},
+        {id:3, title: 'task 3'},
+        {id:4, title: 'task 4'}
+    ];
+    let fromStepName, toStepName;
+    let todoDiv = document.getElementById('todo');
+    createLists(todoDiv, todoArr);
+
+    function createLists(divElem, arr) {
+        for (i = 0; i< arr.length; i++) {
+            divElem.innerHTML += '<div class="taskbox" draggable="true" ondragstart="onDragStart(event);" id=' + arr[i].id + '>' + arr[i].title + '</div>';
+        }
+    }
+
+    function onDragStart(event) {
+        fromStepName = event.srcElement.parentElement.id;
+        console.log(fromStepName);
+        event.dataTransfer.setData('text/plain', event.target.id);
+    }
+    function onDragOver(event) {
+        event.preventDefault();
+    }
+    function onDrop(event) {
+        const dropzone = event.target;
+        toStepName = event.target.id;
+        console.log(toStepName);
+        let returnObj = checkNextStep(fromStepName, toStepName);
+        if (
+            (returnObj.toIndex === returnObj.fromIndex + 1) ||
+            (returnObj.toIndex < returnObj.fromIndex)
+        ){
+            const id = event.dataTransfer.getData('text');
+            const draggableElement = document.getElementById(id);
+            dropzone.appendChild(draggableElement);
+            event.dataTransfer.clearData();
+        } else {
+            alert('Cannot drag');
+        }
+    }
+    function checkNextStep(fromStepName, toStepName) {
+        fromStepNameIndex = stepsArr.findIndex(step => step.name === fromStepName);
+        toStepNameIndex = stepsArr.findIndex(step => step.name === toStepName);
+        console.log(fromStepNameIndex, toStepNameIndex);
+        return {fromIndex: fromStepNameIndex, toIndex: toStepNameIndex};
+    }
+</script>      
+</body>
+</html> 

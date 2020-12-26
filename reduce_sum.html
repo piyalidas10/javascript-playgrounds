@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sum using Reduce operator</title>
+    </head>
+<body>
+<h2>Sum using Reduce operator</h2>
+<script>
+    let productsArr = [
+        {name: 'samsung mobile', price: 15000, count: 1},
+        {name: 'logitech mouse', price: 1395, count: 3},
+        {name: 'mousepad', price: 250, count: 2},
+        {name: 'sound reorder', price: 4600, count: 1}
+    ];
+    let totalPrice = productsArr.reduce(function(previousValue, currentValue) {
+        return previousValue + (currentValue.price * currentValue.count);
+    }, 0);
+    console.log('Total Price => ', totalPrice);
+</script>
+</body>
+</html> 

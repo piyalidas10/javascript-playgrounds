@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Get the filtered Array in which fields are not zero</h2>
+<p>Open console to check</p>
+<script>
+    let originalArr = [
+        {id: 1, name:'test1', value1: 10, value2: 20, value3: 10},
+        {id: 2, name:'test2', value1: 0, value2: 20, value3: 10},
+        {id: 3, name:'test3', value1: 10, value2: 0, value3: 10},
+        {id: 4, name:'test4', value1: 10, value2: 20, value3: 10},
+    ];
+
+    filteredArr = originalArr.filter(ele => !Object.values(ele).includes(0));
+    console.log('filteredArr => ', filteredArr);
+</script>
+</body>
+</html> 

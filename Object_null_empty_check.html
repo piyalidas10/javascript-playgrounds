@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Object null or empty check</title>
+    </head>
+<body>
+<h2>Object null or empty check</h2>
+<script>
+    const obj = {
+        username: 'Piyali',
+        emailId: '',
+        mobile: '14312312'
+    };
+    
+    const isObjNullOrEmpty = Object.values(obj).some(x => (x === null || x === ''));
+    console.log('Object is null or empty => ', Object.values(obj), isObjNullOrEmpty);
+
+</script>
+</body>
+</html> 

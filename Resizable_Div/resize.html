@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Drag and Resize Panel</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        .container {
+            height: 100%;
+        }
+
+        .left,
+        .right {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        .left {
+            background: #50ca50;
+            width: 30%;
+        }
+
+        .right {
+            left: 30%;
+            width: 70%;
+            padding: 10px;
+        }
+
+        .right-top {
+            position: absolute;
+            top: 0;
+            bottom: 236px;
+            left: 0;
+            right: 0;
+            background-color: #ffffff;
+            overflow: auto;
+        }
+
+        .right-bottom {
+            position: absolute;
+            height: 230px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            overflow: auto;
+            background-color: #ffa000;
+        }
+
+        .resizer-1 {
+            background-color: #000000;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 30%;
+            width: 6px;
+            cursor: e-resize;
+        }
+
+        .resizer-2 {
+            background-color: #000000;
+            position: absolute;
+            height: 6px;
+            bottom: 230px;
+            left: 0;
+            right: 0;
+            cursor: n-resize;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left"></div>
+        <div class="right">
+            <div class="right-top">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
+                into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
+                release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+                software like Aldus PageMaker including versions of Lorem Ipsum.
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+                Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at
+                Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a
+                Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the
+                undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et
+                Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the
+                theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor
+                sit amet..", comes from a line in section 1.10.32.
+
+                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested.
+                Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their
+                exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+            </div>
+            <div class="right-bottom">
+
+            </div>
+            <div class="resizer-2" resize="horizontal" resize-height="6" resize-top="right-top"
+                resize-bottom="right-bottom" resize-max="700">
+            </div>
+        </div>
+
+        <div class="resizer-1" resize="vertical" resize-width="6" resize-left="left" resize-right="right"
+            resize-max="700">
+        </div>
+    </div>
+    <script>
+        const resize1 = document.getElementsByClassName('resizer-1')[0];
+        const resize2 = document.getElementsByClassName('resizer-2')[0];
+
+        function getResizeInfo(resizeElem) {
+            console.log(resizeElem.getAttribute('resize-width'));
+            let resize_info = {
+                attr_resize: resizeElem.getAttribute('resize'),
+                attr_resize_width: resizeElem.getAttribute('resize-width'),
+                attr_resize_height: resizeElem.getAttribute('resize-height'),
+                attr_resize_left: resizeElem.getAttribute('resize-left'),
+                attr_resize_right: resizeElem.getAttribute('resize-right'),
+                attr_resize_top: resizeElem.getAttribute('resize-top'),
+                attr_resize_bottom: resizeElem.getAttribute('resize-bottom'),
+                attr_resize_max: resizeElem.getAttribute('resize-max')
+            };
+            console.log(resize_info);
+            return resize_info;
+        }
+
+        let isDragHandle = false;
+
+        resize1.addEventListener('mousedown', (event) => {
+            event.preventDefault();
+            const resize_info = getResizeInfo(resize1);
+            console.log(resize_info);
+            isDragHandle = true;
+            document.body.addEventListener('mousemove', mouseMoveEvent.bind(this, resize_info, resize1));
+            document.body.addEventListener('mouseup', mouseUpEvent.bind());
+        });
+
+        resize2.addEventListener('mousedown', (event) => {
+            event.preventDefault();
+            const resize_info = getResizeInfo(resize2);
+            console.log(resize_info);
+            isDragHandle = true;
+            document.body.addEventListener('mousemove', mouseMoveEvent.bind(this, resize_info, resize2));
+            document.body.addEventListener('mouseup', mouseUpEvent.bind());
+        });
+
+        function mouseMoveEvent(resize_info, resizeElem, event) {
+            if (isDragHandle) {
+                console.log(event);
+                resizeFunction(resize_info, resizeElem, event);
+            }
+        }
+
+        function mouseUpEvent() {
+            isDragHandle = false;
+        }
+
+        function resizeFunction(resize_info, resizeElem, event) {
+            console.log(resize_info);
+            console.log(resizeElem);
+            console.log(event);
+            let resize_max = 0;
+            if (resize_info.attr_resize === 'vertical') {
+                console.log(event.clientX);
+                const resizeLeftElem = document.getElementsByClassName(resize_info.attr_resize_left)[0];
+                const resizeRightElem = document.getElementsByClassName(resize_info.attr_resize_right)[0];
+                const originalwidth = resizeLeftElem.offsetWidth;
+                let difference = event.clientX - originalwidth;
+                let resize_min = resizeLeftElem.offsetLeft - parseInt(resize_info.attr_resize_width);
+                console.log(event.clientX, resize_max);
+                if (resize_info.attr_resize_max && resize_info.attr_resize_max > 0) {
+                    resize_max = parseInt(resize_info.attr_resize_max);
+                } else {
+                    resize_max = (originalwidth + resizeRightElem.offsetWidth) - (parseInt(resize_info.attr_resize_width) +
+                        10);
+                }
+                console.log(difference, resize_max);
+                if (event.clientX < resize_max && event.clientY > resize_min && difference < resize_max) {
+                    let clientX = event.clientX;
+                    resizeElem.style.left = clientX + 'px';
+                    resizeLeftElem.style.width = clientX + 'px';
+                    resizeRightElem.style.left = (clientX + parseInt(resize_info.attr_resize_width)) + 'px';
+                    resizeRightElem.style.width = (resizeRightElem.offsetWidth - difference) + 'px';
+                }
+            }
+            if (resize_info.attr_resize === 'horizontal') {
+                const resizeTopElem = document.getElementsByClassName(resize_info.attr_resize_top)[0];
+                const resizeBottomElem = document.getElementsByClassName(resize_info.attr_resize_bottom)[0];
+                console.log(resizeTopElem, resizeBottomElem);
+                let resize_min = resizeTopElem.offsetTop - parseInt(resize_info.attr_resize_height);
+                if (resize_info.attr_resize_max && resize_info.attr_resize_max > 0) {
+                    resize_max = parseInt(resize_info.attr_resize_max);
+                } else {
+                    resize_max = window.innerHeight - (parseInt(resize_info.attr_resize_height) + 10);
+                }
+                // Handle horizontal resizer
+                let difference = 0;
+                difference = window.innerHeight - event.pageY;
+                console.log(difference, resize_max);
+                if (event.clientY < resize_max && event.clientY > resize_min && difference < resize_max) {
+                    resizeElem.style.bottom = difference + 'px';
+                    resizeTopElem.style.bottom = difference + parseInt(resize_info.attr_resize_height) + 'px';
+                    resizeBottomElem.style.height = difference + 'px';
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

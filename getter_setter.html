@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Getters and Setters</title>
+    </head>
+<body>
+<h2>Getters and Setters</h2>
+<script>
+    const obj = {
+        info: {
+            set name(val) {
+                if ((val === '') || (val.indexOf(' ') === -1)) {
+                    this._name = 'Give Correct Full name';
+                    return;
+                }
+                this._name = val;
+            },
+            get name() {
+                return this._name;
+            }
+        }
+    };
+    
+    obj.info.name = '';
+    console.log(obj.info.name);
+
+    obj.info.name = 'asaff';
+    console.log(obj.info.name);
+
+    obj.info.name = 'Piyali Das';
+    console.log(obj.info.name);
+
+</script>
+</body>
+</html> 

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #products li {
+                display: inline-block;
+                width: 20%;
+                text-align: center;
+            }
+            .productImg{
+                max-width: 100%;
+                height: 100px;
+            }
+            .error{
+                color: red;
+            }
+        </style>
+    </head>
+<body>
+
+<h2>Javascript Fetch API</h2>
+<pre>
+So first we are calling the Fetch API and passing it the URL we defined as a constant above and since no more parameters are set this is a simple GET request.
+Then we get a response but the response we get is not JSON but an object with a series of methods we can use depending on what we want to do with the information, these methods include:
+
+clone() - As the method implies this method creates a clone of the response.
+redirect() - This method creates a new response but with a different URL.
+arrayBuffer() - In here we return a promise that resolves with an ArrayBuffer.
+formData() - Also returns a promise but one that resolves with FormData object.
+blob() - This is one resolves with a Blob.
+text() - In this case it resolves with a string.
+json() - Lastly we have the method to that resolves the promise with JSON.
+</pre>
+<a href="https://www.digitalocean.com/community/tutorials/how-to-use-the-javascript-fetch-api-to-get-data">
+    https://www.digitalocean.com/community/tutorials/how-to-use-the-javascript-fetch-api-to-get-data
+</a>
+<ul id="products"></ul>
+<script>
+function createNode(element) {
+    return document.createElement(element);
+}
+
+function append(parent, el) {
+  return parent.appendChild(el);
+}
+function errorDiv(error) {
+    let p = createNode('p');
+    p.setAttribute("class", "error");
+    p.innerHTML = error;
+    append(document.body, p);
+}
+    /*
+    The fetch() method takes one mandatory argument, the path to the resource you want to fetch.
+    It returns a Promise that resolves to the Response to that request, whether it is successful or not.
+    */
+    const theUrl = 'https://raw.githubusercontent.com/dotnet-presentations/ContosoCrafts/master/src/wwwroot/data/products.json';
+    const ul = document.getElementById('products');
+    fetch(theUrl) // Call the fetch function passing the url of the API as a parameter
+    .then((response) => {
+        console.log(response.status); // Will show you the status
+        if (response.ok) {
+            return response.json();
+        } else {
+            errorDiv(response.status);
+            throw new Error("HTTP status " + response.status);
+        }
+    }) // Transform the data into json
+    .then(function(data) { // Call the fetch function passing the url of the API as a parameter
+        let products = data;
+        console.log(products);
+        return products.map(function(product) { // Map through the results and for each run the code below
+            let li = createNode('li'),
+                img = createNode('img'),
+                h4 = createNode('h4'),
+                span = createNode('span');
+            img.src = product.img;
+            img.setAttribute("class", "productImg");
+            h4.innerHTML = `${product.Title}`;
+            span.innerHTML = `${product.Description}`;
+            append(li, img);
+            append(li, h4);
+            append(li, span);
+            append(ul, li);
+        })
+    })
+    .catch(function(error) { // This is where you run code if the server returns any errors
+        errorDiv(error);
+        console.log(error);
+    });
+</script>
+</body>
+</html> 
