@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Right-click Context Menu In JavaScript</title>
+    </head>
+    <style>
+        .contextMenu {
+            position: absolute;
+            width: 100px;
+            height: auto;
+            color: #ffffff;
+            background: #262933;
+            border: 1px solid #333333;
+            box-shadow: 2px 2px 2px -1px rgba(0, 0, 0, 0.5);
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            display: none;
+        }
+        .contextMenu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .contextMenu ul li {
+            border-bottom: #ffffff 1px solid;
+            padding: 0;
+            margin: 0;
+        }
+        .contextMenu ul li:last-child{
+            border-bottom: none;
+        }
+        .contextMenu ul li a{
+            text-align: left;
+            display: block;
+            padding: 5px 10px;
+            color: #ffffff;
+            text-transform: capitalize;
+            text-decoration: none;
+        }
+        .contextMenu ul li a:hover {
+            background: #2777FF;
+        }
+    </style>
+<body>
+<h2>Right-click Context Menu In JavaScript</h2>
+<h4>Right Click on any section of page to get Custom Context Menu</h4>
+<script>
+    _currentMenuVisible = null;
+    document.addEventListener('contextmenu', e => {
+        e.preventDefault();
+        createContextMenu(e.clientX,e.clientY);
+    });
+    document.addEventListener('click', e => {
+        closeCurrentlyOpenedMenu();
+    });
+
+    /* close context menu */
+    window.onkeyup = function(e) {
+        if (e.keyCode === 27) {
+            closeCurrentlyOpenedMenu();
+        }
+    }
+
+    function createContextMenu(x, y) {
+        closeCurrentlyOpenedMenu();
+        const ctxMenuElem =  document.createElement('div');
+        ctxMenuElem.classList.add('contextMenu');
+        const ulElem =  document.createElement('ul');
+        const menuArr = ['edit', 'copy', 'delete'];
+        for (let ele of menuArr) {
+            let liElem =  document.createElement('li');
+            liElem.innerHTML = '<a href="#">' + ele + '</a>';
+            ulElem.appendChild(liElem);
+        }
+        ctxMenuElem.appendChild(ulElem);
+        document.body.appendChild(ctxMenuElem);
+        _currentMenuVisible = ctxMenuElem;
+        ctxMenuElem.style.display = 'block';
+        ctxMenuElem.style.left = x + "px";
+        ctxMenuElem.style.top = y + "px";
+    }
+
+    function closeContextMenu(menu) {
+        menu.style.left='0px';
+        menu.style.top='0px';
+		console.log(menu);
+        document.body.removeChild(menu);
+        _currentMenuVisible = null;
+    }
+
+    function closeCurrentlyOpenedMenu() {
+        if (_currentMenuVisible !== null) {
+            closeContextMenu(_currentMenuVisible);
+        }
+    }
+</script>
+</body>
+</html>

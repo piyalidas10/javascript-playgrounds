@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>StopPropagation In JavaScript</title>
+        <style>
+            .suggest-box {
+                display: none;
+                padding: 5px 10px;
+                border: #cccccc 1px solid;
+                height: 150px;
+                background: #eeeeee;
+                width: 100%;
+            }
+            .show {
+                display: block;
+            }
+            #txtbox {
+                padding: 5px 10px;
+                height: 30px;
+                width: 100%;
+                background: #000;
+                border: none;
+                color: #ffffff;
+                font-size: 15px;
+                border-radius: 0;
+            }
+            #txtbox:hover, #txtbox:visited {
+                border-radius: 0;
+                border: none;
+            }
+            .form-group {
+                width: 200px;
+                margin:  20px auto;
+            }
+            .form-group ul {
+                padding: 0;
+                margin: 0;
+                margin-bottom: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="form-group">
+            <ul>
+                <li>click on the textbox</li>
+                <li>one box will open</li>
+                <li>to close the box, click outside anywhere in document</li>
+            </ul>
+            <input type="text" id="txtbox">
+            <div class="suggest-box"></div>
+        </div>
+        <script>
+            document.addEventListener('click', (e) => {
+                suggestionBox.classList.remove('show');
+                console.log('document click fire');
+            });
+            const txtbox = document.getElementById('txtbox');
+            const suggestionBox = document.getElementsByClassName('suggest-box')[0];
+            txtbox.addEventListener('click', (e) => {
+                e.stopPropagation();
+                suggestionBox.classList.add('show');
+                console.log('button click fire');
+            });
+        </script>
+    </body>
+</html>    

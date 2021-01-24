@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Find() v Some()</title>
+    </head>
+<body>
+<script>
+    let ObjArr = [
+        {EmpId: 1, EmpName: 'Sam', Dept: 'Engg', Salary: 1000},
+        {EmpId: 2, EmpName: 'Smith', Dept: 'HR', Salary: 2000},
+        {EmpId: 3, EmpName: 'Denis', Dept: 'Engg', Salary: 4000},
+        {EmpId: 4, EmpName: 'Danny', Dept: 'IT', Salary: 3000},
+        {EmpId: 5, EmpName: 'David', Dept: 'HR', Salary: 4000},
+        {EmpId: 6, EmpName: 'John', Dept: 'IT', Salary: 2000},
+    ];
+
+    let findValue = ObjArr.find(emp => emp.Dept === 'CST');
+    console.log('findValue =>', findValue);
+
+
+    let someValue = ObjArr.some(emp => emp.Dept === 'CST');
+    console.log('someValue => ', someValue);
+
+</script>
+</body>
+</html> 
