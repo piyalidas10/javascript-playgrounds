@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Carousel using Pure Javascript</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0,0,0,0);
+        white-space: nowrap;
+        -webkit-clip-path: inset(50%);
+        clip-path: inset(50%);
+        border: 0;
+    }
+    .carousel-sliders {
+        position: relative;
+        width: 710px;
+        margin: auto;
+        height: 400px;
+    }
+    .carousel-sliders-inner {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+    }
+    .carousel-caption {
+        position: absolute;
+        right: 0;
+        bottom: 5px;
+        left: 0;
+        z-index: 10;
+        padding: 20px;
+        color: #fff;
+        text-align: center;
+        background: rgba(0,0,0,0.4);
+    }
+    .carousel-caption h3{
+        margin-top: 0;
+        margin-bottom: 0;
+        transform: translate(-100%, 0);        
+    }
+    .carousel-caption p{
+        opacity: 0;
+        transform: translate3D(0, 0, 0);
+    }
+    .slide {
+        position: relative;
+        display: none;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        width: 100%;
+        -webkit-animation-name: fade;
+        -webkit-animation-duration: 1s;
+        animation-name: fade;
+        animation-duration: 1s;
+    }
+    @-webkit-keyframes fade {
+        from {opacity: 0}
+        to {opacity: 1}
+    }
+
+    @keyframes fade {
+        from {opacity: 0}
+        to {opacity: 1}
+    }
+    .slide.active .carousel-caption h3{
+        transform: translate(0, 0);
+        animation: titleAnimtion 1s;
+    }
+    @keyframes titleAnimtion {
+        0% {
+            transform: translate(-100%, 0);    
+        }
+        100% {
+            transform: translate(0, 0);
+        }
+    }
+    .slide.active .carousel-caption p{
+        transform: translate3D(0, 0, 0);
+        opacity: 1;
+        animation: textAnimtion 1s;
+    }
+    @keyframes textAnimtion {
+        0% {
+            transform: translate3D(0, 60px, 0);   
+            opacity: 0;
+        }
+        100% {
+            transform: translate3D(0, 0, 0);
+            opacity: 1;
+        }
+    }
+    .slide.active {
+        display: block;
+    }
+    .slide img {
+        width: 100%;
+    }
+    .carousel-controls {
+        width: 15%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center; 
+    }
+    .carousel-controls.left {
+        left: 0;
+    }
+    .carousel-controls.right {
+        right: 0;
+    }
+    .prevSlide, .nextSlide {
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        background: rgba(0,0,0,0.4);
+        border-radius: 50%;
+    }
+    .prevSlide.inactive, .nextSlide.inactive{
+        cursor: default;
+    }
+    .prevSlide.inactive .prevIcon {
+        border-right-color: #717070;
+    } 
+    .nextSlide.inactive .nextIcon{
+        border-left-color: #717070;
+    }
+    .prevIcon{
+        margin: 10px 12px;
+        display: inline-block;
+        border-top: 15px solid transparent;
+        border-right: 15px solid #ffffff;
+        border-bottom: 15px solid transparent;        
+    }    
+    .nextIcon{
+        margin: 10px 20px;
+        display: inline-block;
+        border-top: 15px solid transparent;
+        border-left: 15px solid #ffffff;
+        border-bottom: 15px solid transparent;
+    }
+    .carousel-indicators {
+        position: absolute;
+        right: 0;
+        bottom: 5px;
+        left: 0;
+        z-index: 15;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        padding-left: 0;
+        margin-right: 15%;
+        margin-left: 15%;
+        list-style: none;
+    }
+    .carousel-indicators li {
+        cursor: pointer;
+        position: relative;
+        -webkit-box-flex: 0;
+        -ms-flex: 0 1 auto;
+        flex: 0 1 auto;
+        width: 30px;
+        height: 4px;
+        margin-right: 3px;
+        margin-left: 3px;
+        text-indent: -999px;
+        background-color: rgba(255,255,255,.5);
+    }
+    .carousel-indicators .active {
+        background-color: #fff;
+        cursor: default;
+    }
+  </style>
+</head>
+<body>
+    <div class="carousel-sliders">
+        <div class="carousel-sliders-inner">
+            <div class="slide active">
+                <img alt="Slide 1" src="https://www.wallpapers13.com/wp-content/uploads/2019/01/Palouse-Falls-on-the-Palouse-River-tributary-on-Snake-River-in-southeast-Washington-United-States-HD-Wallpaper-for-Desktop-710x400.jpg" />
+                <div class="carousel-caption">
+                    <h3>Slide 1</h3>
+                    <p>Slde 1 content</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img alt="Slide 2" src="https://www.wallpapers13.com/wp-content/uploads/2020/02/Waterfall-Elbow-Falls-small-set-of-waterfalls-along-the-Elbow-River-Kananaskis-Country-Alberta-Canada-3840x2400-1-710x400.jpg" />
+                <div class="carousel-caption">
+                    <h3>Slide 2</h3>
+                    <p>Slde 2 content</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img alt="Slide 3" src="https://www.wallpapers13.com/wp-content/uploads/2020/02/Autumn-Niagara-waterfall-between-USA-and-Canada-Landscape-photography-710x400.jpg" />
+                <div class="carousel-caption">
+                    <h3>Slide 3</h3>
+                    <p>Slde 3 content</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img alt="Slide 4" src="https://www.wallpapers13.com/wp-content/uploads/2015/12/Glen-Canyon-National-Recreation-Area-Lake-Powell-on-the-Colorado-River-in-Utah-and-Arizona-USA-710x400.jpg" />
+                <div class="carousel-caption">
+                    <h3>Slide 4</h3>
+                    <p>Slde 4 content</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img alt="Slide 5" src="https://www.wallpapers13.com/wp-content/uploads/2016/05/Red-River-Gorge-is-a-canyon-system-on-the-Red-River-in-east-central-Kentucky.-Geologically-it-is-part-of-the-Pottsville-Escarpment-710x400.jpg" />
+                <div class="carousel-caption">
+                    <h3>Slide 5</h3>
+                    <p>Slde 5 content</p>
+                </div>                    
+            </div>
+        </div> 
+        <div class="carousel-controls left">
+            <div tabindex="0" class="prevSlide" role="button">
+                <span class="prevIcon"></span>
+                <span class="sr-only">Previous</span>
+            </div> 
+        </div>
+        <div class="carousel-controls right">    
+            <div tabindex="0" class="nextSlide" role="button">
+                <span class="nextIcon"></span>
+                <span class="sr-only">Next</span>
+            </div>
+        </div>                     
+        <ul class="carousel-indicators">
+            <li tabindex="0" data-slide-to="0" class="active" aria-disabled="false"></li>
+            <li tabindex="0" data-slide-to="1" aria-disabled="true"></li>
+            <li tabindex="0" data-slide-to="2" aria-disabled="true"></li>
+            <li tabindex="0" data-slide-to="3" aria-disabled="true"></li>
+            <li tabindex="0" data-slide-to="4" aria-disabled="true"></li>
+        </ul>             
+    </div>
+    <script src="carousel.js"></script>
+</body>
+</html>    

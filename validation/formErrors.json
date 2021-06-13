@@ -1,0 +1,18 @@
+[
+    {
+        "name": "required",
+        "desc": "is required"
+    },
+    {
+        "name": "minlength",
+        "desc": "must be at least n characters"
+    },
+    {
+        "name": "maxlength",
+        "desc": "must be at most n characters"
+    },
+    {
+        "name": "pattern",
+        "desc": "pattern is not valid"
+    }
+]

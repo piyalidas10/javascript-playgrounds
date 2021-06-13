@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Javascript Cookie</title>
+    </head>
+<body>
+<h2>Javascript Cookie</h2>
+<button id="btn1">Set Cookie Value</button>
+<button id="btn2">Get Cookie Value</button>
+<ol>
+    <li>Open "Developer Tools" or right click and "Inspect Element"</li>
+    <li>Click on "Application Tab"</li>
+    <li>Click on "Cookies" from Storage</li>
+    <li>can see cookie variable with set value</li>
+</ol>
+<script>
+    document.getElementById('btn1').addEventListener('click', function(){
+        document.cookie = "username=" + "Piyali Das";
+    });
+    document.getElementById('btn2').addEventListener('click', function(){
+        let cookieName = 'username';
+        let cookieValues = document.cookie.split(';');
+        for (let i=0; i<cookieValues.length; i++) {
+            let eachCookieValue = cookieValues[i].split('=')[1];
+            if(cookieName === cookieValues[i].split('=')[0]) {
+                alert(eachCookieValue);
+            }
+        }
+    });
+</script>
+</body>
+</html> 
