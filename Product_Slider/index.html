@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Carousel with Thumbnail using Pure Javascript</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0,0,0,0);
+        white-space: nowrap;
+        -webkit-clip-path: inset(50%);
+        clip-path: inset(50%);
+        border: 0;
+    }
+    .product-sliders {
+        position: relative;
+        width: 100%;
+        margin: auto;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: start;
+        align-items: start;
+        flex-direction: row;
+        overflow: hidden;
+    }
+    .product-sliders-inner {
+        overflow-x: scroll;
+        position: relative;
+        flex-basis: 0;
+        flex-grow: 1;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+    }
+    .product-sliders-inner::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+        background: transparent;
+    }
+    .product-sliders-scroller {
+        display: grid;
+        min-width: 100%;
+        width: -moz-fit-content;
+        width: -webkit-fit-content;
+        width: fit-content;
+        grid-auto-flow: column;
+        grid-auto-columns: min-content;
+        -webkit-perspective: 600;
+        perspective: 600;
+    }
+    .carousel-caption {
+        position: absolute;
+        right: 0;
+        bottom: 5px;
+        left: 0;
+        z-index: 10;
+        padding: 20px;
+        color: #fff;
+        text-align: center;
+        background: rgba(0,0,0,0.4);
+    }
+    .carousel-caption h3{
+        margin-top: 0;
+        margin-bottom: 0;
+        transform: translate(-100%, 0);        
+    }
+    .carousel-caption p{
+        opacity: 0;
+        transform: translate3D(0, 0, 0);
+    }
+    .product-wrapper {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        overflow: hidden;
+        -webkit-transition-property: all!important;
+        -o-transition-property: all!important;
+        transition-property: all!important; 
+    }
+    .product{
+        background-color: #4a148c!important;
+        box-shadow: 0px 12px 22px 5px rgba(0,0,0,0.12)!important;
+        border-radius: 5px 5px 5px 5px!important;
+        border-color: #6a1b9a!important;
+        border-bottom-width: 7px!important;
+    }
+    .product img{
+        width: 100%;
+    }
+    .shadow{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 10;
+    }
+    .shadow-left{
+        background-image: -webkit-linear-gradient(right,rgba(0,0,0,.5),transparent)!important;
+        background-image: -o-linear-gradient(right,rgba(0,0,0,.5),transparent)!important;
+        background-image: -webkit-gradient(linear,right top,left top,from(rgba(0,0,0,.5)),to(transparent))!important;
+        background-image: linear-gradient(
+    270deg
+    ,rgba(0,0,0,.5),transparent)!important;
+    }
+    .shadow-right{
+        background-image: -webkit-linear-gradient(left,rgba(0,0,0,.5),transparent)!important;
+        background-image: -o-linear-gradient(left,rgba(0,0,0,.5),transparent)!important;
+        background-image: -webkit-gradient(linear,left top,right top,from(rgba(0,0,0,.5)),to(transparent))!important;
+        background-image: linear-gradient(
+    90deg
+    ,rgba(0,0,0,.5),transparent)!important;
+    }
+  </style>
+</head>
+<body>
+    <div class="product-sliders" data-slidesShow="5" data-spacebetween="30">
+        <div class="product-sliders-inner">
+            <div class="product-sliders-scroller">
+                <div class="product-wrapper">
+                    <div class="product">
+                        <img alt="Slide 1" src="https://plugins.divigear.net/divicake/wp-content/uploads/2018/10/holograph-300x300.jpg" />
+                        <div class="shadow shadow-left"></div>
+                        <div class="shadow shadow-right"></div>
+                    </div>                    
+                </div>
+                <div class="product-wrapper">
+                    <div class="product">
+                        <img alt="Slide 2" src="https://plugins.divigear.net/divicake/wp-content/uploads/2018/10/1-300x300.jpg" />
+                        <div class="shadow shadow-left"></div>
+                        <div class="shadow shadow-right"></div>
+                    </div>                    
+                </div>
+                <div class="product-wrapper">
+                    <div class="product">
+                        <img alt="Slide 3" src="https://plugins.divigear.net/divicake/wp-content/uploads/2018/10/6-300x300.jpg" />
+                        <div class="shadow shadow-left"></div>
+                        <div class="shadow shadow-right"></div>
+                    </div>                    
+                </div>
+                <div class="product-wrapper">
+                    <div class="product">
+                        <img alt="Slide 4" src="https://plugins.divigear.net/divicake/wp-content/uploads/2018/10/OSZ8G70-300x300.jpg" />
+                        <div class="shadow shadow-left"></div>
+                        <div class="shadow shadow-right"></div>
+                    </div>                    
+                </div>
+                <div class="product-wrapper">
+                    <div class="product">
+                        <img alt="Slide 5" src="https://plugins.divigear.net/divicake/wp-content/uploads/2018/10/8657-300x300.jpg" />
+                        <div class="shadow shadow-left"></div>
+                        <div class="shadow shadow-right"></div>
+                    </div>                    
+                </div>
+                <div class="product-wrapper">
+                    <div class="product">
+                        <img alt="Slide 6" src="https://plugins.divigear.net/divicake/wp-content/uploads/2018/10/16479-300x300.jpg" />
+                        <div class="shadow shadow-left"></div>
+                        <div class="shadow shadow-right"></div>
+                    </div>                    
+                </div>
+                <div class="product-wrapper">
+                    <div class="product">
+                        <img alt="Slide 7" src="https://plugins.divigear.net/divicake/wp-content/uploads/2018/10/8106-300x300.jpg" />
+                        <div class="shadow shadow-left"></div>
+                        <div class="shadow shadow-right"></div>
+                    </div>                    
+                </div>
+            </div>
+        </div>              
+    </div>
+    <script src="product_slider.js"></script>
+</body>
+</html>    

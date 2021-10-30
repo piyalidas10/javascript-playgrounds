@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Replace multiple spaces with a single space in Javascript</title>
+    </head>
+<body>
+</body>
+<script>
+    let str="Demo                         string";
+    str = str.replace(/\s\s+/g, ' ');
+    // Result : 'Demo string'
+    // \s stands for “whitespace character”. \s\s - two times because we have to check spaces are two times or greater.
+    // The plus sign + is a greedy quantifier, which means one or more times
+</script>
+</html>    

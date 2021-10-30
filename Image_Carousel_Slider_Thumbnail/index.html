@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Carousel with Thumbnail using Pure Javascript</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0,0,0,0);
+        white-space: nowrap;
+        -webkit-clip-path: inset(50%);
+        clip-path: inset(50%);
+        border: 0;
+    }
+    .carousel-sliders {
+        position: relative;
+        width: 710px;
+        margin: auto;
+    }
+    .carousel-sliders-inner {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+    }
+    .carousel-caption {
+        position: absolute;
+        right: 0;
+        bottom: 5px;
+        left: 0;
+        z-index: 10;
+        padding: 20px;
+        color: #fff;
+        text-align: center;
+        background: rgba(0,0,0,0.4);
+    }
+    .carousel-caption h3{
+        margin-top: 0;
+        margin-bottom: 0;
+        transform: translate(-100%, 0);        
+    }
+    .carousel-caption p{
+        opacity: 0;
+        transform: translate3D(0, 0, 0);
+    }
+    .slide {
+        position: relative;
+        display: none;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        width: 100%;
+        -webkit-animation-name: fade;
+        -webkit-animation-duration: 1s;
+        animation-name: fade;
+        animation-duration: 1s;
+    }
+    @-webkit-keyframes fade {
+        from {opacity: 0}
+        to {opacity: 1}
+    }
+
+    @keyframes fade {
+        from {opacity: 0}
+        to {opacity: 1}
+    }
+    .slide.active .carousel-caption h3{
+        transform: translate(0, 0);
+        animation: titleAnimtion 1s;
+    }
+    @keyframes titleAnimtion {
+        0% {
+            transform: translate(-100%, 0);    
+        }
+        100% {
+            transform: translate(0, 0);
+        }
+    }
+    .slide.active .carousel-caption p{
+        transform: translate3D(0, 0, 0);
+        opacity: 1;
+        animation: textAnimtion 1s;
+    }
+    @keyframes textAnimtion {
+        0% {
+            transform: translate3D(0, 60px, 0);   
+            opacity: 0;
+        }
+        100% {
+            transform: translate3D(0, 0, 0);
+            opacity: 1;
+        }
+    }
+    .slide.active {
+        display: block;
+    }
+    .slide img {
+        width: 100%;
+    }
+    .carousel-controls {
+        width: 15%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center; 
+    }
+    .carousel-controls.left {
+        left: 0;
+    }
+    .carousel-controls.right {
+        right: 0;
+    }
+    .prevSlide, .nextSlide {
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        background: rgba(0,0,0,0.4);
+        border-radius: 50%;
+    }
+    .prevSlide.inactive, .nextSlide.inactive{
+        cursor: default;
+    }
+    .prevSlide.inactive .prevIcon {
+        border-right-color: #717070;
+    } 
+    .nextSlide.inactive .nextIcon{
+        border-left-color: #717070;
+    }
+    .prevIcon{
+        margin: 10px 12px;
+        display: inline-block;
+        border-top: 15px solid transparent;
+        border-right: 15px solid #ffffff;
+        border-bottom: 15px solid transparent;        
+    }    
+    .nextIcon{
+        margin: 10px 20px;
+        display: inline-block;
+        border-top: 15px solid transparent;
+        border-left: 15px solid #ffffff;
+        border-bottom: 15px solid transparent;
+    }
+    .carousel-indicators {
+        position: absolute;
+        right: 0;
+        bottom: 5px;
+        left: 0;
+        z-index: 15;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        padding-left: 0;
+        margin-right: 15%;
+        margin-left: 15%;
+        list-style: none;
+    }
+    .carousel-indicators li {
+        cursor: pointer;
+        position: relative;
+        -webkit-box-flex: 0;
+        -ms-flex: 0 1 auto;
+        flex: 0 1 auto;
+        width: 30px;
+        height: 4px;
+        margin-right: 3px;
+        margin-left: 3px;
+        text-indent: -999px;
+        background-color: rgba(255,255,255,.5);
+    }
+    .carousel-indicators .active {
+        background-color: #fff;
+        cursor: default;
+    }
+    .carousel-controls-below {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        position: relative;
+    }
+    .carousel-thumbnail-horizontal{
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        z-index: 10;
+        overflow: hidden;
+        transition: opacity .4s ease;
+        width: 100%;
+    }
+    .carousel-thumbnail-inner {
+        position: relative;
+        flex-basis: 0;
+        flex-grow: 1;
+        overflow-x: scroll;
+        background: #242424;
+        opacity: 1;
+    }
+    .carousel-thumbnail-inner::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+        background: transparent;
+    }
+    .carousel-thumbnail-scroller {
+        display: grid;
+        min-width: 100%;
+        width: -moz-fit-content;
+        width: -webkit-fit-content;
+        width: fit-content;
+        grid-auto-flow: column;
+        grid-auto-columns: min-content;
+        justify-content: flex-start;
+    }
+    .carousel-thumbnail-inner .thumbnail {
+        cursor: pointer;
+        opacity: 0.3;
+    }
+    .carousel-thumbnail-inner .thumbnail.active {
+        cursor: default;
+        opacity: 1;
+    }
+    .carousel-thumbnail-inner .thumbnail picture{
+        display: inline-block;
+    }
+    .carousel-thumbnail-inner .thumbnail img {
+        height: 80px;
+        width: auto;
+    }
+    .thumbnail-prev{
+        position: absolute;
+        transition: all 0.4s;
+        cursor: pointer;
+        left: -100px;
+        z-index: -1;
+        transition: 1s all linear;     
+        width: 30px;
+        height: 30px;
+        background: rgba(0,0,0,0.8);
+        border-radius: 50%;
+        border: #FFF 2px solid;  
+        top: 50%;
+        margin-top: -21px; 
+        opacity: 0;
+    }
+    .thumbnail-prev.enable{
+        left: 10px;
+        z-index: 10;
+        opacity: 1;
+        animation: moveleft 1s linear;
+    }
+    @keyframes moveleft {
+        from {
+            left: -100px;
+            z-index: -1;
+            opacity: 0;
+        }
+        to {
+            left: 10px;
+            z-index: 10;
+            opacity: 1;
+        }
+    }    
+    .thumbnail-next{
+        position: absolute;
+        transition: all 0.4s;
+        cursor: pointer;
+        right: -100px;
+        z-index: -1;
+        transition: 1s all linear;
+        width: 30px;
+        height: 30px;
+        background: rgba(0,0,0,0.8);
+        border-radius: 50%;
+        border: #FFF 2px solid;
+        top: 50%;
+        margin-top: -21px;
+        opacity: 0;
+    }
+    .thumbnail-next.enable{
+        right: 10px;
+        z-index: 10;
+        opacity: 1;
+        animation: moveright 1s linear;
+    }
+    @keyframes moveright {
+        from {
+            right: -100px;
+            z-index: -1;
+            opacity: 0;
+        }
+        to {
+            right: 10px;
+            z-index: 10;
+            opacity: 1;
+        }
+    }
+    .thumbnail-prev-icon{
+        margin: 7px 9px;
+        display: inline-block;
+        border-top: 8px solid transparent;
+        border-right: 8px solid #ffffff;
+        border-bottom: 8px solid transparent;        
+    }    
+    .thumbnail-next-icon{
+        margin: 7px 12px;
+        display: inline-block;
+        border-top: 8px solid transparent;
+        border-left: 8px solid #ffffff;
+        border-bottom: 8px solid transparent;
+    }
+  </style>
+</head>
+<body>
+    <div class="carousel-sliders">
+        <div class="carousel-sliders-inner">
+            <div class="slide active">
+                <img alt="Slide 1" src="https://www.wallpapers13.com/wp-content/uploads/2019/01/Palouse-Falls-on-the-Palouse-River-tributary-on-Snake-River-in-southeast-Washington-United-States-HD-Wallpaper-for-Desktop-710x400.jpg" />
+                <div class="carousel-caption">
+                    <h3>Slide 1</h3>
+                    <p>Slde 1 content</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img alt="Slide 2" src="https://www.wallpapers13.com/wp-content/uploads/2020/02/Waterfall-Elbow-Falls-small-set-of-waterfalls-along-the-Elbow-River-Kananaskis-Country-Alberta-Canada-3840x2400-1-710x400.jpg" />
+                <div class="carousel-caption">
+                    <h3>Slide 2</h3>
+                    <p>Slde 2 content</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img alt="Slide 3" src="https://www.wallpapers13.com/wp-content/uploads/2020/02/Autumn-Niagara-waterfall-between-USA-and-Canada-Landscape-photography-710x400.jpg" />
+                <div class="carousel-caption">
+                    <h3>Slide 3</h3>
+                    <p>Slde 3 content</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img alt="Slide 4" src="https://www.wallpapers13.com/wp-content/uploads/2015/12/Glen-Canyon-National-Recreation-Area-Lake-Powell-on-the-Colorado-River-in-Utah-and-Arizona-USA-710x400.jpg" />
+                <div class="carousel-caption">
+                    <h3>Slide 4</h3>
+                    <p>Slde 4 content</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img alt="Slide 5" src="https://www.wallpapers13.com/wp-content/uploads/2016/05/Red-River-Gorge-is-a-canyon-system-on-the-Red-River-in-east-central-Kentucky.-Geologically-it-is-part-of-the-Pottsville-Escarpment-710x400.jpg" />
+                <div class="carousel-caption">
+                    <h3>Slide 5</h3>
+                    <p>Slde 5 content</p>
+                </div>                    
+            </div>
+            <div class="slide">
+                <img alt="Slide 6" src="https://cdn.wallpapersafari.com/49/46/2UAPET.jpg" />
+                <div class="carousel-caption">
+                    <h3>Slide 6</h3>
+                    <p>Slde 6 content</p>
+                </div>                    
+            </div>
+            <div class="slide">
+                <img alt="Slide 7" src="https://www.wallpapertip.com/wmimgs/14-145022_erawan-national-park-thailand.jpg" />
+                <div class="carousel-caption">
+                    <h3>Slide 7</h3>
+                    <p>Slde 7 content</p>
+                </div>                    
+            </div>
+        </div> 
+        <div class="carousel-controls left">
+            <div tabindex="0" class="prevSlide" role="button">
+                <span class="prevIcon"></span>
+                <span class="sr-only">Previous</span>
+            </div> 
+        </div>
+        <div class="carousel-controls right">    
+            <div tabindex="0" class="nextSlide" role="button">
+                <span class="nextIcon"></span>
+                <span class="sr-only">Next</span>
+            </div>
+        </div> 
+        <div class="carousel-controls-below">
+            <div class="carousel-thumbnail-horizontal" data-has-next="1" data-has-previous="0">
+                <div class="carousel-thumbnail-inner">
+                    <div class="carousel-thumbnail-scroller">
+                        <div class="thumbnail active" tabindex="0" role="button" aria-label="Thumbnail 1">
+                            <picture>
+                                <img alt="Thumbnail 1" src="https://www.wallpapers13.com/wp-content/uploads/2019/01/Palouse-Falls-on-the-Palouse-River-tributary-on-Snake-River-in-southeast-Washington-United-States-HD-Wallpaper-for-Desktop-710x400.jpg" />
+                            </picture>
+                        </div>
+                        <div class="thumbnail" tabindex="0" role="button" aria-label="Thumbnail 2">
+                            <picture>
+                                <img alt="Thumbnail 2" src="https://www.wallpapers13.com/wp-content/uploads/2020/02/Waterfall-Elbow-Falls-small-set-of-waterfalls-along-the-Elbow-River-Kananaskis-Country-Alberta-Canada-3840x2400-1-710x400.jpg" />
+                            </picture>
+                        </div>
+                        <div class="thumbnail" tabindex="0" role="button" aria-label="Thumbnail 3">
+                            <picture>
+                                <img alt="Thumbnail 3" src="https://www.wallpapers13.com/wp-content/uploads/2020/02/Autumn-Niagara-waterfall-between-USA-and-Canada-Landscape-photography-710x400.jpg" />
+                            </picture>
+                        </div>
+                        <div class="thumbnail" tabindex="0" role="button" aria-label="Thumbnail 4">
+                            <picture>
+                                <img alt="Thumbnail 4" src="https://www.wallpapers13.com/wp-content/uploads/2015/12/Glen-Canyon-National-Recreation-Area-Lake-Powell-on-the-Colorado-River-in-Utah-and-Arizona-USA-710x400.jpg" />
+                            </picture>
+                        </div>
+                        <div class="thumbnail" tabindex="0" role="button" aria-label="Thumbnail 5">
+                            <picture>
+                                <img alt="Thumbnail 5" src="https://www.wallpapers13.com/wp-content/uploads/2016/05/Red-River-Gorge-is-a-canyon-system-on-the-Red-River-in-east-central-Kentucky.-Geologically-it-is-part-of-the-Pottsville-Escarpment-710x400.jpg" />
+                            </picture>
+                        </div>
+                        <div class="thumbnail" tabindex="0" role="button" aria-label="Thumbnail 6">
+                            <picture>
+                                <img alt="Thumbnail 6" src="https://cdn.wallpapersafari.com/49/46/2UAPET.jpg" />
+                            </picture>
+                        </div>
+                        <div class="thumbnail" tabindex="0" role="button" aria-label="Thumbnail 7">
+                            <picture>
+                                <img alt="Thumbnail 7" src="https://www.wallpapertip.com/wmimgs/14-145022_erawan-national-park-thailand.jpg" />
+                            </picture>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+            <div class="thumbnail-prev" tabindex="0" role="button">
+                <span class="thumbnail-prev-icon"></span>
+                <span class="sr-only">Thumbnail Previous</span>
+            </div>
+            <div class="thumbnail-next" tabindex="0" role="button">
+                <span class="thumbnail-next-icon"></span>
+                <span class="sr-only">Thumbnail Next</span>
+            </div>
+        </div>               
+    </div>
+    <script src="carousel_thumbnail.js"></script>
+</body>
+</html>    

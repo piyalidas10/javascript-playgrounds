@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Helper Function in Javascript</title>
+    </head>
+<body>
+<h2>Helper Function in Javascript</h2>
+<h4>Helper functions make complicated or repetitive tasks a bit easier, and keep your code DRY (an acronym for Don’t Repeat Yourself).</h4>
+<p>Please enter bellow details</p>
+<input type="text" id="name"/>
+    <input type="text" id="email"/>
+    <input type="number" id="mobile"/>
+    <input type="date" id="dob"/>
+    <button type="button" onclick="show()">Show Info</button>
+<script>
+    function show() {
+        let personDetails = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            mobile: document.getElementById('mobile').value,
+            age: calulateAge(document.getElementById('dob').value)
+        }
+        console.log('Person Details : ', personDetails);
+    }
+    function calulateAge(dob) {
+        let today = new Date();
+        let birthDate = new Date(dob);
+        let age = today.getFullYear() - birthDate.getFullYear();
+        let m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        console.log('today => ', today);
+        console.log('birthdate => ', birthDate);
+        console.log('age => ', age);
+        return age;        
+    }
+</script>
+</body>
+</html> 
