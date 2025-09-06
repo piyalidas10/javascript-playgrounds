@@ -1,0 +1,69 @@
+# Fetch the object of the latest date from an array of objects
+------------------------------------------------------------------------------
+const objArr = [
+ {
+ "Address": 25,
+ "AlertType": 1,
+ "Area": "North",
+ "MeasureDate": "2019-02-01T00:01:01.001Z",
+ "MeasureValue": -1
+ },
+ {
+ "Address": 26,
+ "AlertType": 1,
+ "Area": "West",
+ "MeasureDate": "2016-04-12T15:13:11.733Z",
+ "MeasureValue": -1
+ },
+ {
+ "Address": 25,
+ "AlertType": 1,
+ "Area": "North",
+ "MeasureDate": "2017-02-01T00:01:01.001Z",
+ "MeasureValue": -1
+ }
+];
+
+```
+<!DOCTYPE html>
+<html>
+<body>
+<h1>JavaScript Arrays</h1>
+
+<p id="demo"></p>
+<p id="demo1"></p>
+
+<script>
+const objArr = [
+  {
+    "Address": 25,
+    "AlertType": 1,
+    "Area": "North",
+    "MeasureDate": "2019-02-01T00:01:01.001Z",
+    "MeasureValue": -1
+  },
+  {
+    "Address": 26,
+    "AlertType": 1,
+    "Area": "West",
+    "MeasureDate": "2016-04-12T15:13:11.733Z",
+    "MeasureValue": -1
+  },
+  {
+    "Address": 25,
+    "AlertType": 1,
+    "Area": "North",
+    "MeasureDate": "2017-02-01T00:01:01.001Z",
+    "MeasureValue": -1
+  }
+];
+const latestMeasureDate = objArr.map(obj => obj.MeasureDate).reduce((a, b) => (new Date(a) > new Date(b) ? a : b));
+document.getElementById("demo").innerHTML = latestMeasureDate;
+
+const finalObj = objArr.reduce((a, b) => (new Date(a.MeasureDate) > new Date(b.MeasureDate) ? a : b));
+document.getElementById("demo1").innerHTML = JSON.stringify(finalObj);
+</script>
+
+</body>
+</html>
+```
